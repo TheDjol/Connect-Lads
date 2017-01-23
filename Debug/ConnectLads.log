@@ -1,0 +1,9 @@
+﻿  main.cpp
+  Game.cpp
+g:\connectlads\game.cpp(36): warning C4244: '-=': conversion from 'const double' to 'sf::Int32', possible loss of data
+  Generating Code...
+  Compiling...
+  StartScreen.cpp
+  Generating Code...
+  ConnectLads.vcxproj -> G:\ConnectLads\Debug\ConnectLads.exe
+  ConnectLads.vcxproj -> G:\ConnectLads\Debug\ConnectLads.pdb (Partial PDB)
