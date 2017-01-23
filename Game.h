@@ -33,6 +33,7 @@ private:
 	GamePadState m_state;	//The current gamepad state
 	Xbox360Controller2 m_xController;	//The controller object
 	startScreen *m_startScreen;
+	sf::Font m_font;
 };
 
 

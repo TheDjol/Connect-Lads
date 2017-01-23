@@ -7,8 +7,11 @@ Game::Game()
 	:m_window(sf::VideoMode(900, 600, 32), "Connect Lads", sf::Style::Default),	//Sets up the window
 	m_screen(MenuState::start)
 {
-	
-	m_startScreen = new startScreen(*this);
+	if (!m_font.loadFromFile("arial.ttf"))	//Checks to make sure font is correct
+	{
+		std::cout << "Problem loading font file!" << std::endl;
+	}
+	m_startScreen = new startScreen(*this, m_font);
 }
 
 //Game deconstructor
@@ -53,14 +56,22 @@ void Game::setGameState(MenuState gameState)
 void Game::update(sf::Time delta)
 {
 	m_state = m_xController.update();	//Updates the controller
-	m_startScreen->update(m_state);
+	m_startScreen->update(m_state, delta);
 }
 
 //Function to draw all visual info to the screen
 void Game::draw(sf::RenderWindow &window)
 {
-	
-	window.display();		//Displays the window to the screen
+	switch (m_screen)
+	{
+	case MenuState::start:
+		m_startScreen->render(m_window);
+		break;
+	default:
+		m_window.clear(sf::Color::Blue);	//Clears screen
+		m_window.display();	//Displays the screen
+		break;
+	}
 }
 
 
