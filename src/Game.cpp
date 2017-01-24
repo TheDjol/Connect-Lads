@@ -1,0 +1,102 @@
+#include "Game.h"
+#include "Xbox360Controller.h"
+#include <iostream>
+
+//Game constructor
+Game::Game()
+	:m_window(sf::VideoMode(900, 600, 32), "Connect Lads", sf::Style::Default),	//Sets up the window
+	m_screen(MenuState::start)
+{
+	if (!m_font.loadFromFile(".\\resources\\fonts\\arial.ttf"))	//Checks to make sure font is correct
+	{
+		std::cout << "Problem loading font file!" << std::endl;
+	}
+	m_startScreen = new startScreen(*this, m_font);
+	m_mainMenu = new MainMenu(*this, m_font);
+}
+
+//Game deconstructor
+Game::~Game()
+{
+
+}
+
+//Runs the game, holds the game loop
+void Game::run()
+{
+	static double const MS_PER_UPDATE = 10.0;
+	sf::Clock clock;
+	sf::Int32 lag = 0;
+	
+	while (m_window.isOpen())
+	{
+		sf::Time dt = clock.restart();		//The game loop
+
+		lag += dt.asMilliseconds();
+
+		while (lag > MS_PER_UPDATE)
+		{
+			update(dt);		//Updates the game every second
+			lag -= MS_PER_UPDATE;
+		}
+		update(dt);		//Updates the game every second
+		draw(m_window);		//Draws the game
+	}
+	
+	
+
+}
+
+//Sets the gamestate
+void Game::setGameState(MenuState gameState)
+{
+	m_screen = gameState;	//Sets the current gamestate to be the gamestate passed to the function
+}
+
+//Function to update the game
+void Game::update(sf::Time delta)
+{
+	m_state = m_xController.update();	//Updates the controller
+
+	switch (m_screen)
+	{
+	case start:
+		m_startScreen->update(m_state, delta);
+		//std::cout << "m_screen == start" << std::endl;
+		break;
+	case menuScreen:
+		m_mainMenu->update(m_state, delta);
+		//std::cout << "m_screen == menuScreen" << std::endl;
+		break;
+	case optionScreen:
+		break;
+	case game:
+		break;
+	default:
+		break;
+	}
+	
+
+}
+
+//Function to draw all visual info to the screen
+void Game::draw(sf::RenderWindow &window)
+{
+	switch (m_screen)
+	{
+	case MenuState::start:
+		m_startScreen->render(m_window);
+		break;
+	case MenuState::menuScreen:
+		m_mainMenu->render(m_window);
+		break;
+	case MenuState::optionScreen:
+		break;
+	case MenuState::game:
+		break;
+	default:
+		m_window.clear(sf::Color::Blue);	//Clears screen
+		m_window.display();	//Displays the screen
+		break;
+	}
+}
