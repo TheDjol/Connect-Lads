@@ -50,7 +50,7 @@ void startScreen::update(GamePadState m_state, sf::Time deltaTime)
 
 	if (m_time.asSeconds() > 3)
 	{
-		m_game->setGameState(MenuState::menuScreen);
+		m_game->setGameState(MenuState::MenuScreen);
 	}
 	
 }

@@ -9,10 +9,10 @@
 
 enum MenuState
 {
-	start,
-	menuScreen, 
-	optionScreen,
-	game
+	Start,
+	MenuScreen, 
+	OptionScreen,
+	GameScreen
 };
 
 class startScreen;
@@ -34,6 +34,7 @@ private:
 	void draw(sf::RenderWindow &window);	//The function to draw everything
 	GamePadState m_state;	//The current gamepad state
 	Xbox360Controller2 m_xController;	//The controller object
+	Xbox360Controller2 m_prevController;	//The controller object
 	startScreen *m_startScreen;
 	MainMenu *m_mainMenu;
 	sf::Font m_font;

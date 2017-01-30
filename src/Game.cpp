@@ -5,7 +5,7 @@
 //Game constructor
 Game::Game()
 	:m_window(sf::VideoMode(900, 600, 32), "Connect Lads", sf::Style::Default),	//Sets up the window
-	m_screen(MenuState::start)
+	m_screen(MenuState::Start)
 {
 	if (!m_font.loadFromFile(".\\resources\\fonts\\arial.ttf"))	//Checks to make sure font is correct
 	{
@@ -60,17 +60,17 @@ void Game::update(sf::Time delta)
 
 	switch (m_screen)
 	{
-	case start:
+	case Start:
 		m_startScreen->update(m_state, delta);
 		//std::cout << "m_screen == start" << std::endl;
 		break;
-	case menuScreen:
-		m_mainMenu->update(m_state, delta);
+	case MenuScreen:
+		m_mainMenu->update(m_state, delta, m_xController);
 		//std::cout << "m_screen == menuScreen" << std::endl;
 		break;
-	case optionScreen:
+	case OptionScreen:
 		break;
-	case game:
+	case GameScreen:
 		break;
 	default:
 		break;
@@ -84,15 +84,15 @@ void Game::draw(sf::RenderWindow &window)
 {
 	switch (m_screen)
 	{
-	case MenuState::start:
+	case MenuState::Start:
 		m_startScreen->render(m_window);
 		break;
-	case MenuState::menuScreen:
+	case MenuState::MenuScreen:
 		m_mainMenu->render(m_window);
 		break;
-	case MenuState::optionScreen:
+	case MenuState::OptionScreen:
 		break;
-	case MenuState::game:
+	case MenuState::GameScreen:
 		break;
 	default:
 		m_window.clear(sf::Color::Blue);	//Clears screen
