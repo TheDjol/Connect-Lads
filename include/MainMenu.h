@@ -5,7 +5,6 @@
 
 #include "Game.h"
 #include "Xbox360Controller.h"
-#include <math.h>
 
 class Game;
 
@@ -25,8 +24,11 @@ public:
 	void update(GamePadState m_state, sf::Time deltaTime, Xbox360Controller2 m_controller);	
 	void render(sf::RenderWindow& window);
 	void checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_controller);
+	void selectedButton(GamePadState m_state, Xbox360Controller2 m_controller);
 
 private:
+	const sf::Vector2f WINDOW_DIMENSIONS = sf::Vector2f(900, 600);
+
 	Game *m_game;
 	bool m_timeStop = false;
 	sf::Time m_time;
@@ -36,6 +38,7 @@ private:
 	sf::Sprite m_backgroundSprite;
 
 	bool m_transitionStop = false;
+	bool m_transitionToOptions;
 
 	// Shared component of all menu buttons.
 	sf::Texture m_buttonTexture;
@@ -51,7 +54,5 @@ private:
 	// Components of the exit button.
 	sf::Sprite m_exitSprite;
 	sf::Text m_exitText;
-
-	const double PI = 2 * acos(0.0);
 };
 #endif // !MAIN_MENU

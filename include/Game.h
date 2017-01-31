@@ -5,6 +5,7 @@
 #include "Xbox360Controller.h"
 #include "StartScreen.h"
 #include "MainMenu.h"
+#include "Options.h"
 #include <sstream>
 
 enum MenuState
@@ -17,6 +18,7 @@ enum MenuState
 
 class startScreen;
 class MainMenu;
+class Options;
 
 //The game class
 class Game
@@ -37,6 +39,7 @@ private:
 	Xbox360Controller2 m_prevController;	//The controller object
 	startScreen *m_startScreen;
 	MainMenu *m_mainMenu;
+	Options *m_options;
 	sf::Font m_font;
 };
 
