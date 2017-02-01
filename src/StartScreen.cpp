@@ -55,8 +55,8 @@ startScreen::~startScreen()
 
 void startScreen::update(GamePadState m_state, sf::Time deltaTime)
 {
-	m_john.setRotation(m_john.getRotation() + 0.1);
-	m_jack.setRotation(m_jack.getRotation() + 0.1);
+	m_john.setRotation(m_john.getRotation() - 0.2);
+	m_jack.setRotation(m_jack.getRotation() + 0.2);
 	if (m_state.Start)
 	{
 		m_startPressed = true;

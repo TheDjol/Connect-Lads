@@ -98,9 +98,31 @@ void MainMenu::update(GamePadState m_state, sf::Time deltaTime, Xbox360Controlle
 		}
 		else
 		{
+			m_transitionToOptions = false;
+			m_transitionFromOptions = true;
 			m_game->m_screen = MenuState::OptionScreen;
 		}
 	}
+
+	if (m_transitionFromOptions)
+	{
+		if (m_playSprite.getPosition().x < 370)
+		{
+			m_playSprite.setPosition(m_playSprite.getPosition().x + 1, m_playSprite.getPosition().y);
+			m_optionsSprite.setPosition(m_optionsSprite.getPosition().x + 1, m_optionsSprite.getPosition().y);
+			m_exitSprite.setPosition(m_exitSprite.getPosition().x + 1, m_exitSprite.getPosition().y);
+
+			m_playText.setPosition(m_playText.getPosition().x + 1, m_playText.getPosition().y);
+			m_optionsText.setPosition(m_optionsText.getPosition().x + 1, m_optionsText.getPosition().y);
+			m_exitText.setPosition(m_exitText.getPosition().x + 1, m_exitText.getPosition().y);
+		}
+		else
+		{
+			m_transitionFromOptions = false;
+		}
+	}
+
+
 }
 
 void MainMenu::render(sf::RenderWindow & window)

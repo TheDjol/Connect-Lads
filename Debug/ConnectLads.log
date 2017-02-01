@@ -1,6 +1,4 @@
-﻿  StartScreen.cpp
-c:\users\c00201155\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(58): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\c00201155\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\c00201155\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(77): warning C4305: 'argument': truncation from 'double' to 'float'
-  ConnectLads.vcxproj -> C:\Users\c00201155\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.exe
-  ConnectLads.vcxproj -> C:\Users\c00201155\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.pdb (Partial PDB)
+﻿  Options.cpp
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\options.cpp(35): warning C4305: 'argument': truncation from 'double' to 'float'
+  ConnectLads.vcxproj -> C:\Users\c00205483\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.exe
+  ConnectLads.vcxproj -> C:\Users\c00205483\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.pdb (Partial PDB)

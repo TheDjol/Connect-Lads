@@ -39,6 +39,8 @@ private:
 
 	bool m_transitionStop = false;
 	bool m_transitionToOptions;
+	bool m_transitionFromOptions;
+	
 
 	// Shared component of all menu buttons.
 	sf::Texture m_buttonTexture;
