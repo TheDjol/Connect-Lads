@@ -19,7 +19,12 @@ private:
 	Game *m_game;
 	bool m_startPressed = false;
 	sf::Sprite m_sprite;
+	sf::Sprite m_jack;
+	sf::Sprite m_john;
+
 	sf::Texture m_texture;
+	sf::Texture m_jackTex;
+	sf::Texture m_johnTex;
 	bool m_timeStop = false;
 	sf::Time m_time;
 	const sf::Time TIME_PER_UPDATE = sf::microseconds(1500);

@@ -13,6 +13,7 @@ Game::Game()
 	}
 	m_startScreen = new startScreen(*this, m_font);
 	m_mainMenu = new MainMenu(*this, m_font);
+	m_options = new OptionsScreen(*this, m_font);
 }
 
 //Game deconstructor
@@ -69,6 +70,7 @@ void Game::update(sf::Time delta)
 		//std::cout << "m_screen == menuScreen" << std::endl;
 		break;
 	case OptionScreen:
+		m_options->update(m_state, delta, m_xController);
 		break;
 	case GameScreen:
 		break;
@@ -91,6 +93,7 @@ void Game::draw(sf::RenderWindow &window)
 		m_mainMenu->render(m_window);
 		break;
 	case MenuState::OptionScreen:
+		m_options->render(m_window);
 		break;
 	case MenuState::GameScreen:
 		break;
