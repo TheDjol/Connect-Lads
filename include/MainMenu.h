@@ -45,10 +45,6 @@ private:
 	// Shared component of all menu buttons.
 	sf::Texture m_buttonTexture;
 
-	// Components of the play button.
-	sf::Sprite m_playSprite;
-	sf::Text m_playText;
-
 	// Components of the options button
 	sf::Sprite m_optionsSprite;
 	sf::Text m_optionsText;

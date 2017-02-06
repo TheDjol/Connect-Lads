@@ -24,6 +24,7 @@
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Options.cpp" />
     <ClCompile Include="src\StartScreen.cpp" />
+    <ClCompile Include="src\Widget.cpp" />
     <ClCompile Include="src\Xbox360Controller.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +32,7 @@
     <ClInclude Include="include\MainMenu.h" />
     <ClInclude Include="include\Options.h" />
     <ClInclude Include="include\StartScreen.h" />
+    <ClInclude Include="include\Widget.h" />
     <ClInclude Include="include\Xbox360Controller.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

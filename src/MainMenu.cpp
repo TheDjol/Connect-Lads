@@ -3,7 +3,6 @@
 
 MainMenu::MainMenu(Game& game, sf::Font &font) :
 	m_game(&game),
-	m_playText("PLAY", font, 28),
 	m_optionsText("OPTIONS", font, 28),
 	m_exitText("EXIT", font, 28)
 {
@@ -29,10 +28,6 @@ MainMenu::MainMenu(Game& game, sf::Font &font) :
 	m_backgroundSprite.setPosition(450, 300);
 	m_backgroundSprite.setScale(0.094f, 0.094f);
 	m_backgroundSprite.setRotation(122.0f);
-
-	m_playSprite.setTexture(m_buttonTexture);
-	m_playSprite.setPosition(370,200);
-	m_playText.setPosition(405, 205);
 
 	m_optionsSprite.setTexture(m_buttonTexture);
 	m_optionsSprite.setPosition(370, 300);
@@ -77,14 +72,9 @@ void MainMenu::update(GamePadState m_state, sf::Time deltaTime, Xbox360Controlle
 
 	if (m_transitionToOptions)
 	{
-		if ((m_playSprite.getPosition().x + m_playSprite.getLocalBounds().width) > 0)
+		if ((m_optionsSprite.getPosition().x + m_optionsSprite.getLocalBounds().width) > 0)
 		{
 			sf::Vector2f tempVector;
-
-			tempVector = m_playSprite.getPosition();
-			m_playSprite.setPosition(tempVector.x - 1, tempVector.y);
-			tempVector = m_playText.getPosition();
-			m_playText.setPosition(tempVector.x - 1, tempVector.y);
 			
 			tempVector = m_optionsSprite.getPosition();
 			m_optionsSprite.setPosition(tempVector.x - 1, tempVector.y);
@@ -106,13 +96,11 @@ void MainMenu::update(GamePadState m_state, sf::Time deltaTime, Xbox360Controlle
 
 	if (m_transitionFromOptions)
 	{
-		if (m_playSprite.getPosition().x < 370)
+		if (m_optionsSprite.getPosition().x < 370)
 		{
-			m_playSprite.setPosition(m_playSprite.getPosition().x + 1, m_playSprite.getPosition().y);
 			m_optionsSprite.setPosition(m_optionsSprite.getPosition().x + 1, m_optionsSprite.getPosition().y);
 			m_exitSprite.setPosition(m_exitSprite.getPosition().x + 1, m_exitSprite.getPosition().y);
 
-			m_playText.setPosition(m_playText.getPosition().x + 1, m_playText.getPosition().y);
 			m_optionsText.setPosition(m_optionsText.getPosition().x + 1, m_optionsText.getPosition().y);
 			m_exitText.setPosition(m_exitText.getPosition().x + 1, m_exitText.getPosition().y);
 		}
@@ -131,10 +119,8 @@ void MainMenu::render(sf::RenderWindow & window)
 	window.draw(m_backgroundSprite);		//Draws text to the screen
 	if (m_transitionStop)
 	{
-		window.draw(m_playSprite);
 		window.draw(m_optionsSprite);
 		window.draw(m_exitSprite);
-		window.draw(m_playText);
 		window.draw(m_optionsText);
 		window.draw(m_exitText);
 	}
@@ -147,7 +133,6 @@ void MainMenu::checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_co
 	{
 		
 	case button::Play:
-		m_playText.setColor(sf::Color(236, 0, 24));
 		m_optionsText.setColor(sf::Color(0, 0, 0));
 		m_exitText.setColor(sf::Color(0, 0, 0));
 		
@@ -162,7 +147,6 @@ void MainMenu::checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_co
 		}
 		break;
 	case button::Options:
-		m_playText.setColor(sf::Color(0, 0, 0));
 		m_optionsText.setColor(sf::Color(236, 0, 24));
 		m_exitText.setColor(sf::Color(0, 0, 0));
 	
@@ -177,7 +161,6 @@ void MainMenu::checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_co
 		}
 		break;
 	case button::Exit:
-		m_playText.setColor(sf::Color(0, 0, 0));
 		m_optionsText.setColor(sf::Color(0, 0, 0));
 		m_exitText.setColor(sf::Color(236, 0, 24));
 		
