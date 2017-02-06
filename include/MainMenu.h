@@ -1,12 +1,14 @@
-#pragma once
-
 #ifndef MAIN_MENU
 #define MAIN_MENU
 
 #include "Game.h"
 #include "Xbox360Controller.h"
+#include "Widget.h"
+#include <iostream>
 
 class Game;
+class Button;
+class Widget;
 
 enum button
 {
@@ -40,7 +42,9 @@ private:
 	bool m_transitionStop = false;
 	bool m_transitionToOptions;
 	bool m_transitionFromOptions;
-	
+
+
+	Button m_playButton;
 
 	// Shared component of all menu buttons.
 	sf::Texture m_buttonTexture;

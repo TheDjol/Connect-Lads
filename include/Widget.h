@@ -14,9 +14,6 @@ public:
 	virtual void processInput(GamePadState& controller);
 	virtual void render(sf::RenderWindow& window);
 
-	virtual void getFocus();
-	virtual void loseFocus();
-
 };
 
 #endif // !WIDGET_H
@@ -24,18 +21,22 @@ public:
 #ifndef BUTTON_H
 #define BUTTON_H
 
+
+
 class Button : public Widget
 {
 public:
-	Button(sf::Texture texture, std::string text, sf::Vector2f position, sf::Font font);
+	Button();
+	Button(sf::Texture *texture, std::string *text, sf::Vector2f *position, sf::Font *font);
 	~Button();
 
 	void update();
-	void processInput(GamePadState& controller);
+	//void processInput(GamePadState& controller);
 	void render(sf::RenderWindow& window);
 
 	void getFocus();
 	void loseFocus();
+
 
 private:
 	sf::Vector2f m_position;

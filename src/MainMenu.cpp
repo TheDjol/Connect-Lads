@@ -22,6 +22,9 @@ MainMenu::MainMenu(Game& game, sf::Font &font) :
 		}
 	}
 
+	std::string play = "Play";
+	m_playButton = Button(&m_buttonTexture, &play, &sf::Vector2f(370, 200), &font);
+
 	m_backgroundSprite.setTexture(m_backgroundTexture);
 
 	m_backgroundSprite.setOrigin(450, 300);
@@ -119,6 +122,7 @@ void MainMenu::render(sf::RenderWindow & window)
 	window.draw(m_backgroundSprite);		//Draws text to the screen
 	if (m_transitionStop)
 	{
+		m_playButton.render(window);
 		window.draw(m_optionsSprite);
 		window.draw(m_exitSprite);
 		window.draw(m_optionsText);
@@ -133,6 +137,7 @@ void MainMenu::checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_co
 	{
 		
 	case button::Play:
+		m_playButton.getFocus();
 		m_optionsText.setColor(sf::Color(0, 0, 0));
 		m_exitText.setColor(sf::Color(0, 0, 0));
 		
@@ -147,6 +152,7 @@ void MainMenu::checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_co
 		}
 		break;
 	case button::Options:
+		m_playButton.loseFocus();
 		m_optionsText.setColor(sf::Color(236, 0, 24));
 		m_exitText.setColor(sf::Color(0, 0, 0));
 	
@@ -161,6 +167,7 @@ void MainMenu::checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_co
 		}
 		break;
 	case button::Exit:
+		m_playButton.loseFocus();
 		m_optionsText.setColor(sf::Color(0, 0, 0));
 		m_exitText.setColor(sf::Color(236, 0, 24));
 		
