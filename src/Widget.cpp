@@ -1,4 +1,32 @@
 #include "Widget.h"
+#pragma region WidgetRegion
+Widget::Widget()
+{
+}
+
+Widget::~Widget()
+{
+}
+
+void Widget::update(int noOfFrames)
+{
+}
+
+void Widget::updateShape()
+{
+}
+
+void Widget::processInput(GamePadState & controller)
+{
+}
+
+void Widget::render(sf::RenderWindow & window)
+{
+}
+
+#pragma endregion
+
+#pragma region ButtonRegion
 
 Button::Button()
 {
@@ -11,8 +39,20 @@ Button::Button(sf::Texture *texture, std::string *text, sf::Vector2f *position, 
 	m_text(*text, *font, 28)
 {
 	m_sprite.setTexture(*texture);
+
+	// Gets the dimensions of the rectangle that contains the text.
+	m_spriteRectangle = m_sprite.getLocalBounds();
+	// Centres the origin of the text.
+	m_sprite.setOrigin(m_spriteRectangle.left + m_spriteRectangle.width / 2.0f, m_spriteRectangle.top + m_spriteRectangle.height / 2.0f);
+
 	m_sprite.setPosition(*position);
-	m_text.setPosition(m_sprite.getPosition().x + 35, m_sprite.getPosition().y + 5);
+
+	// Gets the dimensions of the rectangle that contains the text.
+	m_textRectangle = m_text.getLocalBounds();
+	// Centres the origin of the text.
+	m_text.setOrigin(m_textRectangle.left + m_textRectangle.width / 2.0f, m_textRectangle.top + m_textRectangle.height / 2.0f);
+
+	m_text.setPosition(*position);
 	m_text.setColor(sf::Color(0, 0, 0));
 }
 
@@ -38,36 +78,137 @@ void Button::loseFocus()
 	hasFocus = false;
 }
 
+void Button::moveRight()
+{
+	m_sprite.setPosition(m_sprite.getPosition().x + 1, m_sprite.getPosition().y);
+	m_text.setPosition(m_text.getPosition().x + 1, m_text.getPosition().y);
+}
+
+void Button::moveLeft()
+{
+	m_sprite.setPosition(m_sprite.getPosition().x - 1, m_sprite.getPosition().y);
+	m_text.setPosition(m_text.getPosition().x - 1, m_text.getPosition().y);
+}
+
+
 void Button::render(sf::RenderWindow & window)
 {
 	window.draw(m_sprite);
 	window.draw(m_text);
 }
 
-Widget::Widget()
+#pragma endregion
+
+#pragma region RadioButtonRegion
+
+RadioButton::RadioButton()
 {
 }
 
-Widget::~Widget()
+RadioButton::RadioButton(sf::Texture * texture, sf::Vector2f * position) :
+	m_position(*position),
+	m_texture(*texture)
+{
+	m_sprite.setTexture(*texture);
+
+	// Gets the dimensions of the rectangle that contains the text.
+	m_spriteRectangle = m_sprite.getLocalBounds();
+	// Centres the origin of the text.
+	m_sprite.setOrigin(m_spriteRectangle.left + m_spriteRectangle.width / 2.0f, m_spriteRectangle.top + m_spriteRectangle.height / 2.0f);
+
+	m_sprite.setPosition(*position);
+}
+
+RadioButton::~RadioButton()
 {
 }
 
-void Widget::update(int noOfFrames)
+void RadioButton::update()
 {
 }
 
-void Widget::updateShape()
+void RadioButton::render(sf::RenderWindow & window)
 {
+	window.draw(m_sprite);
 }
 
-void Widget::processInput(GamePadState & controller)
+void RadioButton::getFocus()
 {
+	hasFocus = true;
 }
 
-void Widget::render(sf::RenderWindow & window)
+void RadioButton::loseFocus()
 {
+	hasFocus = false;
 }
 
+void RadioButton::moveRight()
+{
+	m_sprite.setPosition(m_sprite.getPosition().x + 1, m_sprite.getPosition().y);
+}
+
+void RadioButton::moveLeft()
+{
+	m_sprite.setPosition(m_sprite.getPosition().x - 1, m_sprite.getPosition().y);
+}
+
+#pragma endregion
+
+#pragma region SliderRegion
 
 
+Slider::Slider()
+{
 
+}
+
+Slider::Slider(sf::Texture * texture, sf::Vector2f * position) :
+	m_position(*position),
+	m_texture(*texture)
+{
+	m_sprite.setTexture(*texture);
+
+	// Gets the dimensions of the rectangle that contains the text.
+	m_spriteRectangle = m_sprite.getLocalBounds();
+	// Centres the origin of the text.
+	m_sprite.setOrigin(m_spriteRectangle.left + m_spriteRectangle.width / 2.0f, m_spriteRectangle.top + m_spriteRectangle.height / 2.0f);
+
+	m_sprite.setPosition(*position);
+}
+
+Slider::~Slider()
+{
+
+}
+
+void Slider::update()
+{
+
+}
+
+void Slider::render(sf::RenderWindow & window)
+{
+	window.draw(m_sprite);
+}
+
+void Slider::getFocus()
+{
+
+}
+
+void Slider::loseFocus()
+{
+
+}
+
+void Slider::moveRight()
+{
+
+}
+
+void Slider::moveLeft()
+{
+
+}
+
+#pragma endregion

@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "Xbox360Controller.h"
 #include "MainMenu.h"
+#include "Widget.h"
 
 class Game; //Declares game for circular reference
 
@@ -44,17 +45,13 @@ private:
 	sf::Texture m_backgroundTexture;	//Background texture
 	sf::Sprite m_backgroundSprite;	//Background sprite
 
+	Button m_buttons[2];
+
 	sf::Texture m_buttonTex;	//Texture for the button
 
-	//The two button sprites
-	sf::Sprite m_button1;
-	sf::Sprite m_button2;
 
 	sf::RectangleShape m_slider;	//The slider
 
-	//The two pieces of text
-	sf::Text m_button1Text;
-	sf::Text m_button2text;
 };
 
 #endif // !OPTIONS

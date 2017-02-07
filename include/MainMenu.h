@@ -35,7 +35,7 @@ private:
 	bool m_timeStop = false;
 	sf::Time m_time;
 	const sf::Time TIME_PER_UPDATE = sf::microseconds(1500);
-	button m_button = button::Play;
+	button m_buttonSelected = button::Play;
 	sf::Texture m_backgroundTexture;
 	sf::Sprite m_backgroundSprite;
 
@@ -43,18 +43,10 @@ private:
 	bool m_transitionToOptions;
 	bool m_transitionFromOptions;
 
-
-	Button m_playButton;
+	Button m_buttons[3];
 
 	// Shared component of all menu buttons.
 	sf::Texture m_buttonTexture;
 
-	// Components of the options button
-	sf::Sprite m_optionsSprite;
-	sf::Text m_optionsText;
-
-	// Components of the exit button.
-	sf::Sprite m_exitSprite;
-	sf::Text m_exitText;
 };
 #endif // !MAIN_MENU

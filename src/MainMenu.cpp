@@ -2,9 +2,7 @@
 #include <iostream>
 
 MainMenu::MainMenu(Game& game, sf::Font &font) :
-	m_game(&game),
-	m_optionsText("OPTIONS", font, 28),
-	m_exitText("EXIT", font, 28)
+	m_game(&game)
 {
 	if (!m_backgroundTexture.loadFromFile(".\\resources\\images\\startBG.jpg"))
 	{
@@ -22,8 +20,13 @@ MainMenu::MainMenu(Game& game, sf::Font &font) :
 		}
 	}
 
-	std::string play = "Play";
-	m_playButton = Button(&m_buttonTexture, &play, &sf::Vector2f(370, 200), &font);
+	std::string play = "PLAY";
+	std::string option = "OPTIONS";
+	std::string exit = "EXIT";
+	
+	m_buttons[0] = Button(&m_buttonTexture, &play, &sf::Vector2f(450, 200), &font);
+	m_buttons[1] = Button(&m_buttonTexture, &option, &sf::Vector2f(450, 300), &font);
+	m_buttons[2] = Button(&m_buttonTexture, &exit, &sf::Vector2f(450, 400), &font);
 
 	m_backgroundSprite.setTexture(m_backgroundTexture);
 
@@ -32,13 +35,6 @@ MainMenu::MainMenu(Game& game, sf::Font &font) :
 	m_backgroundSprite.setScale(0.094f, 0.094f);
 	m_backgroundSprite.setRotation(122.0f);
 
-	m_optionsSprite.setTexture(m_buttonTexture);
-	m_optionsSprite.setPosition(370, 300);
-	m_optionsText.setPosition(375, 305);
-
-	m_exitSprite.setTexture(m_buttonTexture);
-	m_exitSprite.setPosition(370, 400);
-	m_exitText.setPosition(405, 405);
 }
 
 MainMenu::~MainMenu() 
@@ -75,19 +71,13 @@ void MainMenu::update(GamePadState m_state, sf::Time deltaTime, Xbox360Controlle
 
 	if (m_transitionToOptions)
 	{
-		if ((m_optionsSprite.getPosition().x + m_optionsSprite.getLocalBounds().width) > 0)
+		if ((m_buttons[0].m_sprite.getPosition().x + m_buttons[0].m_sprite.getLocalBounds().width) > 0)
 		{
-			sf::Vector2f tempVector;
+			for (int i = 0; i < 3; i++)
+			{
+				m_buttons[i].moveLeft();
+			}
 			
-			tempVector = m_optionsSprite.getPosition();
-			m_optionsSprite.setPosition(tempVector.x - 1, tempVector.y);
-			tempVector = m_optionsText.getPosition();
-			m_optionsText.setPosition(tempVector.x - 1, tempVector.y);
-
-			tempVector = m_exitSprite.getPosition();
-			m_exitSprite.setPosition(tempVector.x - 1, tempVector.y);
-			tempVector = m_exitText.getPosition();
-			m_exitText.setPosition(tempVector.x - 1, tempVector.y);
 		}
 		else
 		{
@@ -99,13 +89,12 @@ void MainMenu::update(GamePadState m_state, sf::Time deltaTime, Xbox360Controlle
 
 	if (m_transitionFromOptions)
 	{
-		if (m_optionsSprite.getPosition().x < 370)
+		if (m_buttons[0].m_sprite.getPosition().x < 370)
 		{
-			m_optionsSprite.setPosition(m_optionsSprite.getPosition().x + 1, m_optionsSprite.getPosition().y);
-			m_exitSprite.setPosition(m_exitSprite.getPosition().x + 1, m_exitSprite.getPosition().y);
-
-			m_optionsText.setPosition(m_optionsText.getPosition().x + 1, m_optionsText.getPosition().y);
-			m_exitText.setPosition(m_exitText.getPosition().x + 1, m_exitText.getPosition().y);
+			for (int i = 0; i < 3; i++)
+			{
+				m_buttons[i].moveRight();
+			}
 		}
 		else
 		{
@@ -122,63 +111,62 @@ void MainMenu::render(sf::RenderWindow & window)
 	window.draw(m_backgroundSprite);		//Draws text to the screen
 	if (m_transitionStop)
 	{
-		m_playButton.render(window);
-		window.draw(m_optionsSprite);
-		window.draw(m_exitSprite);
-		window.draw(m_optionsText);
-		window.draw(m_exitText);
+		for (int i = 0; i < 3; i++)
+		{
+			m_buttons[i].render(window);
+		}
 	}
 	window.display();	//Displays the screen
 }
 
 void MainMenu::checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_controller)
 {
-	switch (m_button)
+	switch (m_buttonSelected)
 	{
 		
 	case button::Play:
-		m_playButton.getFocus();
-		m_optionsText.setColor(sf::Color(0, 0, 0));
-		m_exitText.setColor(sf::Color(0, 0, 0));
+		m_buttons[0].getFocus();
+		m_buttons[1].loseFocus();
+		m_buttons[2].loseFocus();
 		
 		if ((m_state.dpadDown && !m_controller.m_previousState.dpadDown) || (m_state.LeftThumbStick.y > 50 && m_controller.m_previousState.LeftThumbStick.y < 50))
 		{
-			m_button = button::Options;
+			m_buttonSelected = button::Options;
 		}
 		
 		if ((m_state.dpadUp && !m_controller.m_previousState.dpadUp) || (m_state.LeftThumbStick.y < -50 && m_controller.m_previousState.LeftThumbStick.y > -50))
 		{
-			m_button = button::Exit;
+			m_buttonSelected = button::Exit;
 		}
 		break;
 	case button::Options:
-		m_playButton.loseFocus();
-		m_optionsText.setColor(sf::Color(236, 0, 24));
-		m_exitText.setColor(sf::Color(0, 0, 0));
+		m_buttons[0].loseFocus();
+		m_buttons[1].getFocus();
+		m_buttons[2].loseFocus();
 	
 		if ((m_state.dpadDown && !m_controller.m_previousState.dpadDown) || (m_state.LeftThumbStick.y > 50 && m_controller.m_previousState.LeftThumbStick.y < 50))
 		{
-			m_button = button::Exit;
+			m_buttonSelected = button::Exit;
 		}
 		
 		if ((m_state.dpadUp && !m_controller.m_previousState.dpadUp) || (m_state.LeftThumbStick.y < -50 && m_controller.m_previousState.LeftThumbStick.y > -50))
 		{
-			m_button = button::Play;
+			m_buttonSelected = button::Play;
 		}
 		break;
 	case button::Exit:
-		m_playButton.loseFocus();
-		m_optionsText.setColor(sf::Color(0, 0, 0));
-		m_exitText.setColor(sf::Color(236, 0, 24));
+		m_buttons[0].loseFocus();
+		m_buttons[1].loseFocus();
+		m_buttons[2].getFocus();
 		
 		if ((m_state.dpadDown && !m_controller.m_previousState.dpadDown) || (m_state.LeftThumbStick.y > 50 && m_controller.m_previousState.LeftThumbStick.y < 50))
 		{
-			m_button = button::Play;
+			m_buttonSelected = button::Play;
 		}
 
 		if ((m_state.dpadUp && !m_controller.m_previousState.dpadUp) || (m_state.LeftThumbStick.y < -50 && m_controller.m_previousState.LeftThumbStick.y > -50))
 		{
-			m_button = button::Options;
+			m_buttonSelected = button::Options;
 		}
 		break;
 	default:
@@ -188,7 +176,7 @@ void MainMenu::checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_co
 
 void MainMenu::selectedButton(GamePadState m_state, Xbox360Controller2 m_controller)
 {
-	switch (m_button)
+	switch (m_buttonSelected)
 	{
 	case Play:
 		if (m_state.A && !m_controller.m_previousState.A)

@@ -13,6 +13,7 @@ public:
 	virtual void updateShape();
 	virtual void processInput(GamePadState& controller);
 	virtual void render(sf::RenderWindow& window);
+	
 
 };
 
@@ -20,8 +21,6 @@ public:
 
 #ifndef BUTTON_H
 #define BUTTON_H
-
-
 
 class Button : public Widget
 {
@@ -31,19 +30,88 @@ public:
 	~Button();
 
 	void update();
-	//void processInput(GamePadState& controller);
 	void render(sf::RenderWindow& window);
 
 	void getFocus();
 	void loseFocus();
 
+	void moveRight();
+	void moveLeft();
+
+	sf::Vector2f m_position;
+	sf::Sprite m_sprite;
+	
 
 private:
-	sf::Vector2f m_position;
+	
 	sf::Texture m_texture;
-	sf::Sprite m_sprite;
+	
 	sf::Text m_text;
 	sf::Font m_font;
 	bool hasFocus;
+	sf::FloatRect m_textRectangle;
+	sf::FloatRect m_spriteRectangle;
 };
-#endif // ! BUTTON_H
+#endif // !BUTTON_H
+
+#ifndef RADIOBUTTON_H
+#define RADIOBUTTON_H
+
+class RadioButton : public Widget
+{
+public:
+	RadioButton();
+	RadioButton(sf::Texture *texture, sf::Vector2f *position);
+	~RadioButton();
+
+	void update();
+	void render(sf::RenderWindow& window);
+
+	void getFocus();
+	void loseFocus();
+
+	void moveRight();
+	void moveLeft();
+
+	sf::Vector2f m_position;
+	sf::Sprite m_sprite;
+
+private:
+	sf::Texture m_texture;
+	bool hasFocus;
+	sf::FloatRect m_spriteRectangle;
+};
+#endif // !RADIOBUTTON_H
+
+#ifndef SLIDER_H
+#define SLIDER_H
+
+class Slider : public Widget
+{
+public:
+	Slider();
+	Slider(sf::Texture *texture, sf::Vector2f *position);
+	~Slider();
+
+	void update();
+	void render(sf::RenderWindow& window);
+
+	void getFocus();
+	void loseFocus();
+
+	void moveRight();
+	void moveLeft();
+
+	sf::Vector2f m_position;
+	sf::Sprite m_sprite;
+
+private:
+	sf::Texture m_texture;
+	bool hasFocus;
+	sf::FloatRect m_spriteRectangle;
+	
+	sf::CircleShape m_circle;
+	sf::RectangleShape m_sliderBackground;
+	sf::RectangleShape m_slider;
+};
+#endif // !SLIDER_H
