@@ -26,8 +26,8 @@ OptionsScreen::OptionsScreen(Game& game, sf::Font &font) :
 	std::string yeah = "MEME";
 	std::string back = "BACK";
 
-	m_buttons[0] = Button(&m_buttonTex, &yeah, &sf::Vector2f(450, 200), &font);
-	m_buttons[1] = Button(&m_buttonTex, &back, &sf::Vector2f(450, 300), &font);
+	m_buttons[0] = Button(&m_buttonTex, &yeah, &sf::Vector2f(1000, 200), &font);
+	m_buttons[1] = Button(&m_buttonTex, &back, &sf::Vector2f(1000, 400), &font);
 
 	//Assigns the background texture to the background sprite
 	m_backgroundSprite.setTexture(m_backgroundTexture);
@@ -36,9 +36,11 @@ OptionsScreen::OptionsScreen(Game& game, sf::Font &font) :
 	m_backgroundSprite.setPosition(450, 300);	//Sets the backgrounds position
 	m_backgroundSprite.setScale(1.04, 1.04);	//Sets the backgrounds scale
 
-	m_slider.setFillColor(sf::Color(0, 0, 0));	//Sets the initial slider colour to black
-	m_slider.setPosition(1000, 300);	//Sets the sliders position
-	m_slider.setSize(sf::Vector2f(180, 30));	//Sets the size fo the slider
+	//m_slider.setFillColor(sf::Color(0, 0, 0));	//Sets the initial slider colour to black
+	//m_slider.setPosition(1000, 300);	//Sets the sliders position
+	//m_slider.setSize(sf::Vector2f(180, 30));	//Sets the size fo the slider
+
+	m_slider = Slider(&sf::Vector2f(1000, 300));
 
 }
 
@@ -55,9 +57,14 @@ void OptionsScreen::update(GamePadState m_state, sf::Time deltaTime, Xbox360Cont
 	selectedButton(m_state, m_controller);	//Calls the function to check if a button has been clicked
 
 	//If the options is transitioning in from the menu
-	if (m_transitionFromMenu)
+	if (m_transitionFromMenu && m_buttons[0].m_sprite.getPosition().x > 410)
 	{
-		
+		for (int i = 0; i < 2; i++)
+		{
+			m_buttons[i].moveLeft();
+		}
+		m_slider.moveLeft();
+		std::cout << m_slider.m_slider.getPosition().x << std::endl;
 	}
 
 	//If the options is transitioning to the menu
@@ -74,7 +81,11 @@ void OptionsScreen::render(sf::RenderWindow & window)
 
 	window.draw(m_backgroundSprite);		//Draws text to the screen
 
-	window.draw(m_slider);	//draws the slider
+	for (int i = 0; i < 2; i++)
+	{
+		m_buttons[i].render(window);
+	}
+	m_slider.render(window);
 
 	window.display();	//Displays the screen
 }
@@ -87,7 +98,7 @@ void OptionsScreen::checkButtonSelected(GamePadState m_state, Xbox360Controller2
 	switch (m_oButton)
 	{
 	case Option1:
-		m_slider.setFillColor(sf::Color(0, 0, 0));
+		m_slider.loseFocus();
 
 		//Checks if the player is trying to select the button below the current one
 		if ((m_state.dpadDown && !m_controller.m_previousState.dpadDown) || (m_state.LeftThumbStick.y > 50 && m_controller.m_previousState.LeftThumbStick.y < 50))
@@ -102,7 +113,7 @@ void OptionsScreen::checkButtonSelected(GamePadState m_state, Xbox360Controller2
 		}
 		break;
 	case Option2:
-		m_slider.setFillColor(sf::Color(236, 0, 24));
+		m_slider.getFocus();
 
 		//Checks if the player is trying to select the button below the current one
 		if ((m_state.dpadDown && !m_controller.m_previousState.dpadDown) || (m_state.LeftThumbStick.y > 50 && m_controller.m_previousState.LeftThumbStick.y < 50))
@@ -117,7 +128,7 @@ void OptionsScreen::checkButtonSelected(GamePadState m_state, Xbox360Controller2
 		}
 		break;
 	case Option3:
-		m_slider.setFillColor(sf::Color(0, 0, 0));
+		m_slider.loseFocus();
 
 		//Checks if the player is trying to select the button below the current one
 		if ((m_state.dpadDown && !m_controller.m_previousState.dpadDown) || (m_state.LeftThumbStick.y > 50 && m_controller.m_previousState.LeftThumbStick.y < 50))

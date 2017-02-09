@@ -50,7 +50,7 @@ private:
 	sf::Texture m_buttonTex;	//Texture for the button
 
 
-	sf::RectangleShape m_slider;	//The slider
+	Slider m_slider;	//The slider
 
 };
 

@@ -162,23 +162,25 @@ Slider::Slider()
 
 }
 
-Slider::Slider(sf::Texture * texture, sf::Vector2f * position) :
-	m_position(*position),
-	m_texture(*texture)
+Slider::Slider(sf::Vector2f * position) :
+	m_position(*position)
 {
-	m_sprite.setTexture(*texture);
+	float size = 10.0f;
+	m_sliderBackground.setPosition(m_position);
+	m_slider.setPosition(m_position);
+	m_circle.setPosition(m_position);
 
-	// Gets the dimensions of the rectangle that contains the text.
-	m_spriteRectangle = m_sprite.getLocalBounds();
-	// Centres the origin of the text.
-	m_sprite.setOrigin(m_spriteRectangle.left + m_spriteRectangle.width / 2.0f, m_spriteRectangle.top + m_spriteRectangle.height / 2.0f);
+	m_sliderBackground.setFillColor(sf::Color::Blue);
+	m_slider.setFillColor(sf::Color::Black);
+	m_circle.setFillColor(sf::Color::White);
 
-	m_sprite.setPosition(*position);
+	m_sliderBackground.setSize(sf::Vector2f(size, size));
+	m_slider.setSize(sf::Vector2f(size, size));
+	m_circle.setRadius(size);
 }
 
 Slider::~Slider()
 {
-
 }
 
 void Slider::update()
@@ -188,27 +190,53 @@ void Slider::update()
 
 void Slider::render(sf::RenderWindow & window)
 {
-	window.draw(m_sprite);
+	window.draw(m_sliderBackground);
+	window.draw(m_slider);
+	window.draw(m_circle);
 }
 
 void Slider::getFocus()
 {
-
+	m_slider.setFillColor(sf::Color(236, 0, 24));
+	hasFocus = true;
 }
 
 void Slider::loseFocus()
 {
-
+	m_slider.setFillColor(sf::Color(0, 0, 0));
+	hasFocus = false;
 }
 
 void Slider::moveRight()
 {
-
+	m_sliderBackground.setPosition(m_slider.getPosition().x + 1, m_slider.getPosition().y);
+	m_slider.setPosition(m_slider.getPosition().x + 1, m_slider.getPosition().y);
+	m_circle.setPosition(m_circle.getPosition().x + 1, m_circle.getPosition().y);
 }
 
 void Slider::moveLeft()
 {
+	m_sliderBackground.setPosition(m_sliderBackground.getPosition().x - 1, m_sliderBackground.getPosition().y);
+	m_slider.setPosition(m_slider.getPosition().x - 1, m_slider.getPosition().y);
+	m_circle.setPosition(m_circle.getPosition().x - 1, m_circle.getPosition().y);
+}
 
+void Slider::incrementSlider()
+{
+	if (m_slider.getSize().x < 100)
+	{
+		m_slider.setSize(sf::Vector2f(m_slider.getScale().x + 1, m_slider.getSize().y));
+		m_circle.setPosition(m_slider.getPosition().x + m_slider.getLocalBounds().width, m_slider.getPosition().y);
+	}
+}
+
+void Slider::decrementSlider()
+{
+	if (m_slider.getSize().x > 0)
+	{
+		m_slider.setSize(sf::Vector2f(m_slider.getSize().x - 1, m_slider.getSize().y));
+		m_circle.setPosition(m_slider.getPosition().x + m_slider.getLocalBounds().width, m_slider.getPosition().y);
+	}
 }
 
 #pragma endregion

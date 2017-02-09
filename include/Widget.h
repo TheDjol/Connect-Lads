@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include "Xbox360Controller.h"
+#include <iostream>
 
 class Widget
 {
@@ -90,7 +91,7 @@ class Slider : public Widget
 {
 public:
 	Slider();
-	Slider(sf::Texture *texture, sf::Vector2f *position);
+	Slider(sf::Vector2f *position);
 	~Slider();
 
 	void update();
@@ -102,16 +103,18 @@ public:
 	void moveRight();
 	void moveLeft();
 
+	void incrementSlider();
+	void decrementSlider();
+
 	sf::Vector2f m_position;
-	sf::Sprite m_sprite;
+
+	sf::RectangleShape m_slider;
 
 private:
-	sf::Texture m_texture;
 	bool hasFocus;
-	sf::FloatRect m_spriteRectangle;
 	
 	sf::CircleShape m_circle;
 	sf::RectangleShape m_sliderBackground;
-	sf::RectangleShape m_slider;
+	
 };
 #endif // !SLIDER_H
