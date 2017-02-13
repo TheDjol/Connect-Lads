@@ -36,6 +36,8 @@ public:
 	void getFocus();
 	void loseFocus();
 
+	void scaleButtons(float xScale, float yScale);
+
 	void moveRight();
 	void moveLeft();
 
@@ -115,6 +117,5 @@ private:
 	
 	sf::CircleShape m_circle;
 	sf::RectangleShape m_sliderBackground;
-	
 };
 #endif // !SLIDER_H

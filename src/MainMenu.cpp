@@ -108,7 +108,7 @@ void MainMenu::update(GamePadState m_state, sf::Time deltaTime, Xbox360Controlle
 void MainMenu::render(sf::RenderWindow & window)
 {
 	window.clear(sf::Color(220, 20, 60));	//Clears window
-	window.draw(m_backgroundSprite);		//Draws text to the screen
+	window.draw(m_backgroundSprite);		//Draws the background to the screen
 	if (m_transitionStop)
 	{
 		for (int i = 0; i < 3; i++)

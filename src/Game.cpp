@@ -14,6 +14,7 @@ Game::Game()
 	m_startScreen = new startScreen(*this, m_font);
 	m_mainMenu = new MainMenu(*this, m_font);
 	m_options = new OptionsScreen(*this, m_font);
+	m_gamePlay = new Gameplay(*this, m_font);
 }
 
 //Game deconstructor
@@ -73,6 +74,7 @@ void Game::update(sf::Time delta)
 		m_options->update(m_state, delta, m_xController);
 		break;
 	case GameScreen:
+		m_gamePlay->update(m_state, delta, m_xController);
 		break;
 	default:
 		break;
@@ -96,6 +98,7 @@ void Game::draw(sf::RenderWindow &window)
 		m_options->render(m_window);
 		break;
 	case MenuState::GameScreen:
+		m_gamePlay->render(m_window);
 		break;
 	default:
 		m_window.clear(sf::Color::Blue);	//Clears screen

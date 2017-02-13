@@ -39,6 +39,10 @@ public:
 	void checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_controller);
 	//Function to check if buttons are selected 
 	void selectedButton(GamePadState m_state, Xbox360Controller2 m_controller);
+
+	//Function to highlight the selected button
+	void buttonChosen(int buttonNumber);
+
 private:
 	Game *m_game; //The game object so you can change game states
 
@@ -55,8 +59,13 @@ private:
 	sf::Texture m_buttonTex;	//Texture for the button
 
 	// Initalizes the number of buttons that will be used to cap off the top of the columns
+	const int SIZE_OF_BUTTON_ARRAY = 7;
 	Button m_buttons[7];
 	// Makes a Rectangle shape 2D array that has 6 rows and 7 columns
+	const int GAME_GRID_COLUMNS = 7;
+	const int GAME_GRID_ROWS = 6;
 	sf::RectangleShape m_gameGrid[6][7];
+
+	int buttonNumber = 0; //int for which button is chosen
 };
 #endif // !GAMEPLAY_H

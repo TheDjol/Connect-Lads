@@ -46,7 +46,6 @@ OptionsScreen::~OptionsScreen()
 {
 }
 
-
 //Function to update the options screen
 void OptionsScreen::update(GamePadState m_state, sf::Time deltaTime, Xbox360Controller2 m_controller)
 {
@@ -151,13 +150,13 @@ void OptionsScreen::checkButtonSelected(GamePadState m_state, Xbox360Controller2
 		}
 
 		
-		if ((m_state.dpadLeft && !m_controller.m_previousState.dpadLeft) || (m_state.LeftThumbStick.x < -50 && m_controller.m_previousState.LeftThumbStick.x > -50))
+		if (m_state.dpadLeft || m_state.LeftThumbStick.x < -50)
 		{
 			m_slider.decrementSlider();
 		}
 
 		
-		if ((m_state.dpadRight && !m_controller.m_previousState.dpadRight) || (m_state.LeftThumbStick.x > 50 && m_controller.m_previousState.LeftThumbStick.x < 50))
+		if (m_state.dpadRight  || m_state.LeftThumbStick.x > 50)
 		{
 			m_slider.incrementSlider();
 		}

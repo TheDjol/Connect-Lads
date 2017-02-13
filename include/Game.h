@@ -6,6 +6,7 @@
 #include "StartScreen.h"
 #include "MainMenu.h"
 #include "Options.h"
+#include "Gameplay.h"
 #include <sstream>
 
 enum MenuState
@@ -16,6 +17,7 @@ enum MenuState
 	GameScreen
 };
 
+class Gameplay;
 class startScreen;
 class MainMenu;
 class OptionsScreen;
@@ -40,6 +42,7 @@ private:
 	startScreen *m_startScreen;
 	MainMenu *m_mainMenu;
 	OptionsScreen *m_options;
+	Gameplay *m_gamePlay;
 	sf::Font m_font;
 };
 

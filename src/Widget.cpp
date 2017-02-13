@@ -78,6 +78,11 @@ void Button::loseFocus()
 	hasFocus = false;
 }
 
+void Button::scaleButtons(float xScale, float yScale)
+{
+	m_sprite.setScale(xScale, yScale);
+}
+
 void Button::moveRight()
 {
 	m_sprite.setPosition(m_sprite.getPosition().x + 1, m_sprite.getPosition().y);
@@ -227,7 +232,7 @@ void Slider::incrementSlider()
 {
 	if (m_slider.getLocalBounds().width < 150)
 	{
-		m_slider.setSize(sf::Vector2f(m_slider.getSize().x + 5, m_slider.getSize().y));
+		m_slider.setSize(sf::Vector2f(m_slider.getSize().x + 0.05f, m_slider.getSize().y));
 		m_circle.setPosition(m_slider.getPosition().x + m_slider.getLocalBounds().width, m_slider.getPosition().y);
 	}
 }
@@ -236,7 +241,7 @@ void Slider::decrementSlider()
 {
 	if (m_slider.getSize().x > 0)
 	{
-		m_slider.setSize(sf::Vector2f(m_slider.getSize().x - 5, m_slider.getSize().y));
+		m_slider.setSize(sf::Vector2f(m_slider.getSize().x - 0.05f, m_slider.getSize().y));
 		m_circle.setPosition(m_slider.getPosition().x + m_slider.getLocalBounds().width, m_slider.getPosition().y);
 	}
 }
