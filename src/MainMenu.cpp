@@ -89,7 +89,7 @@ void MainMenu::update(GamePadState m_state, sf::Time deltaTime, Xbox360Controlle
 
 	if (m_transitionFromOptions)
 	{
-		if (m_buttons[0].m_sprite.getPosition().x < 370)
+		if (m_buttons[0].m_sprite.getPosition().x < 410)
 		{
 			for (int i = 0; i < 3; i++)
 			{
@@ -185,7 +185,7 @@ void MainMenu::selectedButton(GamePadState m_state, Xbox360Controller2 m_control
 		}
 		break;
 	case Options:
-		if (m_state.A && !m_controller.m_previousState.A)
+		if (m_state.A && !m_controller.m_previousState.A && !m_transitionFromOptions)
 		{
 			m_transitionToOptions = true;
 		}

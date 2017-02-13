@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Gameplay.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Options.cpp" />
@@ -29,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Gameplay.h" />
     <ClInclude Include="include\MainMenu.h" />
     <ClInclude Include="include\Options.h" />
     <ClInclude Include="include\StartScreen.h" />

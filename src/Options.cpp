@@ -36,11 +36,8 @@ OptionsScreen::OptionsScreen(Game& game, sf::Font &font) :
 	m_backgroundSprite.setPosition(450, 300);	//Sets the backgrounds position
 	m_backgroundSprite.setScale(1.04, 1.04);	//Sets the backgrounds scale
 
-	//m_slider.setFillColor(sf::Color(0, 0, 0));	//Sets the initial slider colour to black
-	//m_slider.setPosition(1000, 300);	//Sets the sliders position
-	//m_slider.setSize(sf::Vector2f(180, 30));	//Sets the size fo the slider
 
-	m_slider = Slider(&sf::Vector2f(1000, 300));
+	m_slider = Slider(&sf::Vector2f(930, 280));
 
 }
 
@@ -57,21 +54,43 @@ void OptionsScreen::update(GamePadState m_state, sf::Time deltaTime, Xbox360Cont
 	selectedButton(m_state, m_controller);	//Calls the function to check if a button has been clicked
 
 	//If the options is transitioning in from the menu
-	if (m_transitionFromMenu && m_buttons[0].m_sprite.getPosition().x > 410)
+	if (m_transitionFromMenu)
 	{
-		for (int i = 0; i < 2; i++)
+		if (m_buttons[0].m_sprite.getPosition().x > 410)
 		{
-			m_buttons[i].moveLeft();
+			for (int i = 0; i < 2; i++)
+			{
+				m_buttons[i].moveLeft();
+			}
+			m_slider.moveLeft();
 		}
-		m_slider.moveLeft();
-		std::cout << m_slider.m_slider.getPosition().x << std::endl;
+		else
+			m_transitionFromMenu = false;
+		
 	}
+
+	m_slider.update();
 
 	//If the options is transitioning to the menu
 	if (m_transitionToMenu)
 	{
+		if ((m_buttons[0].m_sprite.getPosition().x  <= 1000))
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				m_buttons[i].moveRight();
+			}
+			m_slider.moveRight();
 
+		}
+		else
+		{
+			m_transitionToMenu = false;
+			m_transitionFromMenu = true;
+			m_game->m_screen = MenuState::MenuScreen;
+		}
 	}
+
 }
 
 //Function to render the options screen
@@ -98,6 +117,8 @@ void OptionsScreen::checkButtonSelected(GamePadState m_state, Xbox360Controller2
 	switch (m_oButton)
 	{
 	case Option1:
+		m_buttons[0].getFocus();
+		m_buttons[1].loseFocus();
 		m_slider.loseFocus();
 
 		//Checks if the player is trying to select the button below the current one
@@ -113,6 +134,8 @@ void OptionsScreen::checkButtonSelected(GamePadState m_state, Xbox360Controller2
 		}
 		break;
 	case Option2:
+		m_buttons[0].loseFocus();
+		m_buttons[1].loseFocus();
 		m_slider.getFocus();
 
 		//Checks if the player is trying to select the button below the current one
@@ -126,8 +149,23 @@ void OptionsScreen::checkButtonSelected(GamePadState m_state, Xbox360Controller2
 		{
 			m_oButton = optionButton::Option1;	//Changes the current button
 		}
+
+		
+		if ((m_state.dpadLeft && !m_controller.m_previousState.dpadLeft) || (m_state.LeftThumbStick.x < -50 && m_controller.m_previousState.LeftThumbStick.x > -50))
+		{
+			m_slider.decrementSlider();
+		}
+
+		
+		if ((m_state.dpadRight && !m_controller.m_previousState.dpadRight) || (m_state.LeftThumbStick.x > 50 && m_controller.m_previousState.LeftThumbStick.x < 50))
+		{
+			m_slider.incrementSlider();
+		}
+
 		break;
 	case Option3:
+		m_buttons[0].loseFocus();
+		m_buttons[1].getFocus();
 		m_slider.loseFocus();
 
 		//Checks if the player is trying to select the button below the current one
@@ -158,7 +196,7 @@ void OptionsScreen::selectedButton(GamePadState m_state, Xbox360Controller2 m_co
 	case Option2:
 		break;
 	case Option3:
-		if (m_state.A && !m_controller.m_previousState.A)	//Checks if the back button has been pressed
+		if (m_state.A && !m_controller.m_previousState.A && !m_transitionFromMenu)	//Checks if the back button has been pressed
 		{
 			m_transitionToMenu = true;	//Starts the transition to the menu
 		}

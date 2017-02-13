@@ -165,18 +165,20 @@ Slider::Slider()
 Slider::Slider(sf::Vector2f * position) :
 	m_position(*position)
 {
-	float size = 10.0f;
+	float circleSize = 15.0f;
+	float sizeY = 20.0f;
+	float sizeX = 150.0f;
 	m_sliderBackground.setPosition(m_position);
 	m_slider.setPosition(m_position);
 	m_circle.setPosition(m_position);
 
 	m_sliderBackground.setFillColor(sf::Color::Blue);
 	m_slider.setFillColor(sf::Color::Black);
-	m_circle.setFillColor(sf::Color::White);
+	m_circle.setFillColor(sf::Color::Black);
 
-	m_sliderBackground.setSize(sf::Vector2f(size, size));
-	m_slider.setSize(sf::Vector2f(size, size));
-	m_circle.setRadius(size);
+	m_sliderBackground.setSize(sf::Vector2f(sizeX, sizeY));
+	m_slider.setSize(sf::Vector2f(sizeX, sizeY));
+	m_circle.setRadius(circleSize);
 }
 
 Slider::~Slider()
@@ -185,7 +187,7 @@ Slider::~Slider()
 
 void Slider::update()
 {
-
+	m_circle.setPosition(m_slider.getPosition().x + m_slider.getLocalBounds().width - (m_circle.getLocalBounds().width / 2), m_slider.getPosition().y - (m_circle.getLocalBounds().height / 6));
 }
 
 void Slider::render(sf::RenderWindow & window)
@@ -223,9 +225,9 @@ void Slider::moveLeft()
 
 void Slider::incrementSlider()
 {
-	if (m_slider.getSize().x < 100)
+	if (m_slider.getLocalBounds().width < 150)
 	{
-		m_slider.setSize(sf::Vector2f(m_slider.getScale().x + 1, m_slider.getSize().y));
+		m_slider.setSize(sf::Vector2f(m_slider.getSize().x + 5, m_slider.getSize().y));
 		m_circle.setPosition(m_slider.getPosition().x + m_slider.getLocalBounds().width, m_slider.getPosition().y);
 	}
 }
@@ -234,7 +236,7 @@ void Slider::decrementSlider()
 {
 	if (m_slider.getSize().x > 0)
 	{
-		m_slider.setSize(sf::Vector2f(m_slider.getSize().x - 1, m_slider.getSize().y));
+		m_slider.setSize(sf::Vector2f(m_slider.getSize().x - 5, m_slider.getSize().y));
 		m_circle.setPosition(m_slider.getPosition().x + m_slider.getLocalBounds().width, m_slider.getPosition().y);
 	}
 }
