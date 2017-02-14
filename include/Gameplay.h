@@ -43,6 +43,12 @@ public:
 	//Function to highlight the selected button
 	void buttonChosen(int buttonNumber);
 
+	//Adds the appropriate coloured block to the grid.
+	void addToColumn(int buttonNumber);
+
+	void checkArray(int *row,int *column, sf::Color colour);
+
+
 private:
 	Game *m_game; //The game object so you can change game states
 
@@ -65,6 +71,10 @@ private:
 	const int GAME_GRID_COLUMNS = 7;
 	const int GAME_GRID_ROWS = 6;
 	sf::RectangleShape m_gameGrid[6][7];
+
+	sf::Color m_gameGridColour[6][7];
+
+	bool m_player = true;
 
 	int buttonNumber = 0; //int for which button is chosen
 };

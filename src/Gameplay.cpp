@@ -4,13 +4,16 @@ Gameplay::Gameplay(Game& game, sf::Font &font) :
 	m_game(&game)
 {
 
-	if (!m_backgroundTexture.loadFromFile(".\\resources\\images\\startBG.jpg"))
+	if (!m_backgroundTexture.loadFromFile(".\\resources\\images\\gameBG.png"))
 	{
 		{
 			std::string s("Error loading texture");	//Outputs error message
 			throw std::exception(s.c_str());
 		}
 	}
+
+	m_backgroundSprite.setTexture(m_backgroundTexture);
+	m_backgroundSprite.setPosition(0, 0);
 
 	if (!m_buttonTex.loadFromFile(".\\resources\\images\\Button.png"))
 	{
@@ -33,8 +36,10 @@ Gameplay::Gameplay(Game& game, sf::Font &font) :
 
 		for (int j = 0; j < GAME_GRID_ROWS; j++)
 		{
-			m_gameGrid[j][i] = sf::RectangleShape(sf::Vector2f(60, 30));
-			m_gameGrid[j][i].setPosition(105 * (i + 1), 100 + (40 * (j + 1)));
+			m_gameGrid[j][i] = sf::RectangleShape(sf::Vector2f(100, 60));
+			m_gameGrid[j][i].setPosition (((105 * (i + 1) - 25)), 100 + (70 * (j + 1)));
+			m_gameGrid[j][i].setOutlineColor(sf::Color::Black);
+			m_gameGrid[j][i].setOutlineThickness(2.0f);
 		}
 
 	}
@@ -76,10 +81,15 @@ void Gameplay::render(sf::RenderWindow & window)
 
 void Gameplay::checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_controller)
 {
+	if (m_state.A && !m_controller.m_previousState.A)
+	{
+		addToColumn(buttonNumber);
+	}
 	buttonChosen(buttonNumber);
 	switch (m_buttonSelected)
 	{
 	case ButtonA:
+		
 		if ((m_state.dpadRight && !m_controller.m_previousState.dpadRight) || (m_state.LeftThumbStick.x > 50 && m_controller.m_previousState.LeftThumbStick.x < 50))
 		{
 			buttonNumber = 1;
@@ -249,4 +259,88 @@ void Gameplay::buttonChosen(int buttonNumber)
 	}
 	else
 		m_buttons[6].loseFocus();
+}
+
+void Gameplay::addToColumn(int buttonNumber)
+{
+	int counter = 0;
+	for (int j = 5; j >= 0; j--)
+	{
+		if (m_gameGrid[j][buttonNumber].getFillColor() == sf::Color::White && counter == 0 && m_player)
+		{
+			m_gameGrid[j][buttonNumber].setFillColor(sf::Color::Blue);
+			counter++;
+			m_player = false;
+			checkArray(&j, &buttonNumber, sf::Color::Blue);
+			break;
+		}
+
+		else if (m_gameGrid[j][buttonNumber].getFillColor() == sf::Color::White && counter == 0 && !m_player)
+		{
+			m_gameGrid[j][buttonNumber].setFillColor(sf::Color::Red);
+			counter++;
+			m_player = true;
+			checkArray(&j, &buttonNumber, sf::Color::Red);
+			break;
+		}
+	}
+}
+
+void Gameplay::checkArray(int *row, int *column, sf::Color colour)
+{
+	for (int i = 0; i < GAME_GRID_COLUMNS; i++)
+	{
+		for (int j = 0; j < GAME_GRID_ROWS; j++)
+		{
+			m_gameGridColour[j][i] = m_gameGrid[j][i].getFillColor();
+		}
+	}
+
+	// Checks square Up one, left one of the newest block
+	if (m_gameGridColour[*row - 1][*column - 1] == colour)
+	{
+
+	}
+
+	// Checks square left one of the newest block
+	if (m_gameGridColour[*row][*column - 1] == colour)
+	{
+
+	}
+
+	// Checks square down one, left one of the newest block
+	if (m_gameGridColour[*row + 1][*column - 1] == colour)
+	{
+
+	}
+
+	// Checks square Up one of the newest block
+	if (m_gameGridColour[*row - 1][*column] == colour)
+	{
+
+	}
+
+	// Checks square down one of the newest block
+	if (m_gameGridColour[*row + 1][*column] == colour)
+	{
+
+	}
+
+	// Checks square Up one, right one of the newest block
+	if (m_gameGridColour[*row - 1][*column + 1] == colour)
+	{
+
+	}
+
+	// Checks square right one of the newest block
+	if (m_gameGridColour[*row][*column + 1] == colour)
+	{
+
+	}
+
+	// Checks square down one, right one of the newest block
+	if (m_gameGridColour[*row + 1][*column + 1] == colour)
+	{
+
+	}
 }
