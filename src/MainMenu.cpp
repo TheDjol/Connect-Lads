@@ -44,10 +44,13 @@ MainMenu::~MainMenu()
 
 void MainMenu::update(GamePadState m_state, sf::Time deltaTime, Xbox360Controller2 m_controller)
 {
-	checkButtonSelected(m_state, m_controller);
-	selectedButton(m_state, m_controller);
+	if (m_transitionStop)
+	{
+		checkButtonSelected(m_state, m_controller);
+		selectedButton(m_state, m_controller);
+	}
 
-	if (m_state.Back)
+	if (m_state.Back && !m_state.Back)
 	{
 		exit(0);
 	}

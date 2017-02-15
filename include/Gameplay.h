@@ -37,16 +37,18 @@ public:
 	//Function to edit the text based on if theyre selected
 	//And to check if the player is moving between buttons
 	void checkButtonSelected(GamePadState m_state, Xbox360Controller2 m_controller);
-	//Function to check if buttons are selected 
-	void selectedButton(GamePadState m_state, Xbox360Controller2 m_controller);
-
+	
 	//Function to highlight the selected button
 	void buttonChosen(int buttonNumber);
 
 	//Adds the appropriate coloured block to the grid.
 	void addToColumn(int buttonNumber);
 
-	void checkArray(int *row,int *column, sf::Color colour);
+	//Checks if the most reason block placed has an adjacent block of the same colour
+	void checkArray(int row,int column, sf::Color colour);
+
+	//Checks if there is a 4 in a row
+	void checkLine(int row, int column, int direction1, sf::Color colour);
 
 
 private:
@@ -76,6 +78,15 @@ private:
 
 	bool m_player = true;
 
-	int buttonNumber = 0; //int for which button is chosen
+	int m_buttonNumber = 0; // Int for which button is chosen
+
+	bool m_victory = false;
+
+	sf::Font m_font;
+	sf::Text m_winner;
+	sf::Text m_return;
+
+	sf::Texture m_headTexture[4];
+	sf::Sprite m_headSprite[6][7];
 };
 #endif // !GAMEPLAY_H
