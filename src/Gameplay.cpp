@@ -37,6 +37,14 @@ Gameplay::Gameplay(Game& game, sf::Font &font) :
 		}
 	}
 
+	if (!m_blankTexture.loadFromFile(".\\resources\\images\\Blank.png"))
+	{
+		{
+			std::string s("Error loading texture");	//Outputs error message
+			throw std::exception(s.c_str());
+		}
+	}
+
 	std::string buttonText[7] = { "A", "B", "C", "D", "E", "F", "G" };
 	
 	for (int i = 0; i < SIZE_OF_BUTTON_ARRAY; i++)
@@ -54,6 +62,8 @@ Gameplay::Gameplay(Game& game, sf::Font &font) :
 			m_gameGrid[j][i].setPosition (((105 * (i + 1) - 25)), 100 + (70 * (j + 1)));
 			m_gameGrid[j][i].setOutlineColor(sf::Color::Black);
 			m_gameGrid[j][i].setOutlineThickness(2.0f);
+			m_headSprite[j][i].setPosition(m_gameGrid[j][i].getPosition().x + 25, m_gameGrid[j][i].getPosition().y - 10);
+			
 		}
 
 	}
@@ -74,6 +84,7 @@ void Gameplay::update(GamePadState m_state, sf::Time deltaTime, Xbox360Controlle
 
 			for (int j = 0; j < GAME_GRID_ROWS; j++)
 			{
+				m_headSprite[j][i].setTexture(m_blankTexture);
 				m_gameGrid[j][i].setFillColor(sf::Color::White);
 			}
 
@@ -103,6 +114,7 @@ void Gameplay::render(sf::RenderWindow & window)
 		for (int j = 0; j < GAME_GRID_ROWS; j++)
 		{
 			window.draw(m_gameGrid[j][i]);
+			window.draw(m_headSprite[j][i]);
 		}
 
 	}
@@ -273,6 +285,7 @@ void Gameplay::addToColumn(int buttonNumber)
 			counter++;
 			m_player = false;
 			checkArray(j, buttonNumber, sf::Color::Blue);
+			m_headSprite[j][buttonNumber].setTexture(m_headTexture[2]);
 			break;
 		}
 
@@ -282,6 +295,7 @@ void Gameplay::addToColumn(int buttonNumber)
 			counter++;
 			m_player = true;
 			checkArray(j, buttonNumber, sf::Color::Red);
+			m_headSprite[j][buttonNumber].setTexture(m_headTexture[1]);
 			break;
 		}
 	}

@@ -7,6 +7,7 @@
 #include "Xbox360Controller.h"
 #include "MainMenu.h"
 #include "Widget.h"
+#include <random>
 
 class Game; //Declares game for circular reference
 
@@ -88,5 +89,7 @@ private:
 
 	sf::Texture m_headTexture[4];
 	sf::Sprite m_headSprite[6][7];
+
+	sf::Texture m_blankTexture;
 };
 #endif // !GAMEPLAY_H

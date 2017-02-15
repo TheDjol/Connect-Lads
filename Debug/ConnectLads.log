@@ -1,4 +1,5 @@
-﻿  MainMenu.cpp
-c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\mainmenu.cpp(67): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  Gameplay.cpp
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\gameplay.cpp(52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\gameplay.cpp(62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   ConnectLads.vcxproj -> C:\Users\c00205483\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.exe
   ConnectLads.vcxproj -> C:\Users\c00205483\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.pdb (Partial PDB)
