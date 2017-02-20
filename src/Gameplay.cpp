@@ -75,6 +75,9 @@ Gameplay::~Gameplay()
 
 void Gameplay::update(GamePadState m_state, sf::Time deltaTime, Xbox360Controller2 m_controller)
 {
+	srand(time(NULL));
+	/* generate secret number between 0 and 3: */
+	m_randomHead = rand() % 4 + 0;
 	checkButtonSelected(m_state, m_controller);
 
 	if (m_state.Back)
@@ -276,6 +279,7 @@ void Gameplay::buttonChosen(int buttonNumber)
 
 void Gameplay::addToColumn(int buttonNumber)
 {
+
 	int counter = 0;
 	for (int j = 5; j >= 0; j--)
 	{
@@ -285,7 +289,7 @@ void Gameplay::addToColumn(int buttonNumber)
 			counter++;
 			m_player = false;
 			checkArray(j, buttonNumber, sf::Color::Blue);
-			m_headSprite[j][buttonNumber].setTexture(m_headTexture[2]);
+			m_headSprite[j][buttonNumber].setTexture(m_headTexture[m_randomHead]);
 			break;
 		}
 
@@ -295,7 +299,7 @@ void Gameplay::addToColumn(int buttonNumber)
 			counter++;
 			m_player = true;
 			checkArray(j, buttonNumber, sf::Color::Red);
-			m_headSprite[j][buttonNumber].setTexture(m_headTexture[1]);
+			m_headSprite[j][buttonNumber].setTexture(m_headTexture[m_randomHead]);
 			break;
 		}
 	}

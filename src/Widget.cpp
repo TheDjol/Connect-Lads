@@ -247,3 +247,61 @@ void Slider::decrementSlider()
 }
 
 #pragma endregion
+
+#pragma region LabelRegion
+
+Label::Label()
+{
+}
+
+Label::Label(std::string * text, sf::Font * font, sf::Vector2f *position) :
+	m_font(*font),
+	m_position(*position),
+	m_text(*text, *font, 32)
+{
+	// Gets the dimensions of the rectangle that contains the text.
+	m_textRectangle = m_text.getLocalBounds();
+	// Centres the origin of the text.
+	m_text.setOrigin(m_textRectangle.left + m_textRectangle.width / 2.0f, m_textRectangle.top + m_textRectangle.height / 2.0f);
+	
+	m_text.setPosition(*position);
+	m_text.setColor(sf::Color(0, 0, 0));
+}
+
+Label::~Label()
+{
+
+}
+
+void Label::update()
+{
+}
+
+void Label::render(sf::RenderWindow & window)
+{
+	window.draw(m_text);
+}
+
+void Label::getFocus()
+{
+	m_text.setColor(sf::Color(236, 0, 24));
+	m_hasFocus = true;
+}
+
+void Label::loseFocus()
+{
+	m_text.setColor(sf::Color(0, 0, 0));
+	m_hasFocus = false;
+}
+
+void Label::moveRight()
+{
+	m_text.setPosition(m_text.getPosition().x + 1, m_text.getPosition().y);
+}
+
+void Label::moveLeft()
+{
+	m_text.setPosition(m_text.getPosition().x - 1, m_text.getPosition().y);
+}
+
+#pragma endregion

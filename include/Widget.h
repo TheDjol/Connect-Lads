@@ -79,6 +79,8 @@ public:
 	sf::Vector2f m_position;
 	sf::Sprite m_sprite;
 
+	bool m_filled = false; // If the radio button is filled or not
+
 private:
 	sf::Texture m_texture;
 	bool hasFocus;
@@ -119,3 +121,34 @@ private:
 	sf::RectangleShape m_sliderBackground;
 };
 #endif // !SLIDER_H
+
+#ifndef LABEL_H
+#define LABEL_H
+
+class Label :  public Widget
+{
+public:
+	Label();
+	Label(std::string *text, sf::Font *font, sf::Vector2f *position);
+	~Label();
+
+	void update();
+	void render(sf::RenderWindow& window);
+	
+	void getFocus();
+	void loseFocus();
+
+	void moveRight();
+	void moveLeft();
+
+	sf::Vector2f m_position;
+
+private:
+	bool m_hasFocus;
+
+	sf::Text m_text;
+	sf::Font m_font;
+	sf::FloatRect m_textRectangle;
+};
+
+#endif // !LABEL_H

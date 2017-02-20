@@ -7,7 +7,7 @@
 #include "Xbox360Controller.h"
 #include "MainMenu.h"
 #include "Widget.h"
-#include <random>
+#include <time.h>
 
 class Game; //Declares game for circular reference
 
@@ -91,5 +91,7 @@ private:
 	sf::Sprite m_headSprite[6][7];
 
 	sf::Texture m_blankTexture;
+
+	int m_randomHead = 0; //int for which head should be drawn
 };
 #endif // !GAMEPLAY_H
