@@ -69,13 +69,13 @@ void Button::update()
 void Button::getFocus()
 {
 	m_text.setColor(sf::Color(236, 0, 24));
-	hasFocus = true;
+	m_hasFocus = true;
 }
 
 void Button::loseFocus()
 {
 	m_text.setColor(sf::Color(0,0,0));
-	hasFocus = false;
+	m_hasFocus = false;
 }
 
 void Button::scaleButtons(float xScale, float yScale)
@@ -139,12 +139,12 @@ void RadioButton::render(sf::RenderWindow & window)
 
 void RadioButton::getFocus()
 {
-	hasFocus = true;
+	m_hasFocus = true;
 }
 
 void RadioButton::loseFocus()
 {
-	hasFocus = false;
+	m_hasFocus = false;
 }
 
 void RadioButton::moveRight()
@@ -167,8 +167,9 @@ Slider::Slider()
 
 }
 
-Slider::Slider(sf::Vector2f * position) :
-	m_position(*position)
+Slider::Slider(sf::Vector2f * position, int numOfSegments) :
+	m_position(*position),
+	m_numOfSegments(numOfSegments)
 {
 	float circleSize = 15.0f;
 	float sizeY = 20.0f;
@@ -184,6 +185,8 @@ Slider::Slider(sf::Vector2f * position) :
 	m_sliderBackground.setSize(sf::Vector2f(sizeX, sizeY));
 	m_slider.setSize(sf::Vector2f(sizeX, sizeY));
 	m_circle.setRadius(circleSize);
+
+	m_currentSegment = numOfSegments;
 }
 
 Slider::~Slider()
@@ -205,13 +208,13 @@ void Slider::render(sf::RenderWindow & window)
 void Slider::getFocus()
 {
 	m_slider.setFillColor(sf::Color(236, 0, 24));
-	hasFocus = true;
+	m_hasFocus = true;
 }
 
 void Slider::loseFocus()
 {
 	m_slider.setFillColor(sf::Color(0, 0, 0));
-	hasFocus = false;
+	m_hasFocus = false;
 }
 
 void Slider::moveRight()
@@ -228,22 +231,40 @@ void Slider::moveLeft()
 	m_circle.setPosition(m_circle.getPosition().x - 1, m_circle.getPosition().y);
 }
 
-void Slider::incrementSlider()
+int Slider::incrementSlider()
 {
-	if (m_slider.getLocalBounds().width < 150)
+	//if (m_slider.getLocalBounds().width < 150)
+	//{
+	//	m_slider.setSize(sf::Vector2f(m_slider.getSize().x + 0.05f, m_slider.getSize().y));
+	//	m_circle.setPosition(m_slider.getPosition().x + m_slider.getLocalBounds().width, m_slider.getPosition().y);
+	//}
+
+	if (m_currentSegment < m_numOfSegments)
 	{
-		m_slider.setSize(sf::Vector2f(m_slider.getSize().x + 0.05f, m_slider.getSize().y));
+		m_currentSegment++;
+		m_slider.setSize(sf::Vector2f((m_sliderBackground.getSize().x / m_numOfSegments) * m_currentSegment, m_slider.getSize().y));
 		m_circle.setPosition(m_slider.getPosition().x + m_slider.getLocalBounds().width, m_slider.getPosition().y);
 	}
+
+	return m_currentSegment;
 }
 
-void Slider::decrementSlider()
+int Slider::decrementSlider()
 {
-	if (m_slider.getSize().x > 0)
+	//if (m_slider.getSize().x > 0)
+	//{
+	//	m_slider.setSize(sf::Vector2f(m_slider.getSize().x - 0.05f, m_slider.getSize().y));
+	//	m_circle.setPosition(m_slider.getPosition().x + m_slider.getLocalBounds().width, m_slider.getPosition().y);
+	//}
+
+	if (m_currentSegment > 0)
 	{
-		m_slider.setSize(sf::Vector2f(m_slider.getSize().x - 0.05f, m_slider.getSize().y));
+		m_currentSegment--;
+		m_slider.setSize(sf::Vector2f((m_sliderBackground.getSize().x / m_numOfSegments) * m_currentSegment, m_slider.getSize().y));
 		m_circle.setPosition(m_slider.getPosition().x + m_slider.getLocalBounds().width, m_slider.getPosition().y);
 	}
+
+	return m_currentSegment;
 }
 
 #pragma endregion
@@ -257,7 +278,7 @@ Label::Label()
 Label::Label(std::string * text, sf::Font * font, sf::Vector2f *position) :
 	m_font(*font),
 	m_position(*position),
-	m_text(*text, *font, 32)
+	m_text(*text, *font, 38)
 {
 	// Gets the dimensions of the rectangle that contains the text.
 	m_textRectangle = m_text.getLocalBounds();

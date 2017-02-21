@@ -2,9 +2,10 @@
 
 
 // Constructor for the options screen
-OptionsScreen::OptionsScreen(Game& game, sf::Font &font) :
+OptionsScreen::OptionsScreen(Game& game, sf::Font &font, sf::RenderWindow &window) :
 	m_game(&game),
-	m_font(font)
+	m_font(font),
+	m_window(window)
 {
 	// Check to make sure the image loads correctly
 	if (!m_backgroundTexture.loadFromFile(".\\resources\\images\\startBG.jpg"))
@@ -51,13 +52,14 @@ OptionsScreen::OptionsScreen(Game& game, sf::Font &font) :
 	m_backgroundSprite.setPosition(450, 300);	//Sets the backgrounds position
 	m_backgroundSprite.setScale(1.04, 1.04);	//Sets the backgrounds scale
 
-	m_radioButton = RadioButton(&m_emptyRadioButtonTex, &sf::Vector2f(1000, 200));
+	m_radioButton = RadioButton(&m_emptyRadioButtonTex, &sf::Vector2f(950, 200));
 
 
-	m_labelText = "Label";
-	m_label = Label(&m_labelText, &m_font, &sf::Vector2f(800,200));
+	m_labelText = "Mute";
+	m_label = Label(&m_labelText, &m_font, &sf::Vector2f(1020,200));
 
-	m_slider = Slider(&sf::Vector2f(930, 280));
+	m_slider = Slider(&sf::Vector2f(930, 280), 4);
+	m_sliderValue = 4;
 
 }
 
@@ -71,6 +73,7 @@ void OptionsScreen::update(GamePadState m_state, sf::Time deltaTime, Xbox360Cont
 {
 	checkButtonSelected(m_state, m_controller);	//Calls the function to check which button is selected
 	selectedButton(m_state, m_controller);	//Calls the function to check if a button has been clicked
+	changeWindowResolution(m_window);
 
 	//If the options is transitioning in from the menu
 	if (m_transitionFromMenu)
@@ -167,15 +170,15 @@ void OptionsScreen::checkButtonSelected(GamePadState m_state, Xbox360Controller2
 		}
 
 		
-		if (m_state.dpadLeft || m_state.LeftThumbStick.x < -50)
+		if ((m_state.dpadLeft && !m_controller.m_previousState.dpadLeft) || (m_state.LeftThumbStick.x < -50 && m_controller.m_previousState.LeftThumbStick.x > -50))
 		{
-			m_slider.decrementSlider();
+			m_sliderValue = m_slider.decrementSlider();
 		}
 
 		
-		if (m_state.dpadRight  || m_state.LeftThumbStick.x > 50)
+		if ((m_state.dpadRight && !m_controller.m_previousState.dpadRight) || (m_state.LeftThumbStick.x > 50 && m_controller.m_previousState.LeftThumbStick.x < 50))
 		{
-			m_slider.incrementSlider();
+			m_sliderValue = m_slider.incrementSlider();
 		}
 
 		break;
@@ -233,5 +236,29 @@ void OptionsScreen::selectedButton(GamePadState m_state, Xbox360Controller2 m_co
 		break;
 	default:
 		break;
+	}
+}
+
+void OptionsScreen::changeWindowResolution(sf::RenderWindow & window)
+{
+	if (m_sliderValue == 0)
+	{
+		window.setSize(sf::Vector2u(360,240));
+	}
+	else if (m_sliderValue == 1)
+	{
+		window.setSize(sf::Vector2u(450,300));
+	}
+	else if (m_sliderValue == 2)
+	{
+		window.setSize(sf::Vector2u(600, 400));
+	}
+	else if (m_sliderValue == 3)
+	{
+		window.setSize(sf::Vector2u(750,500));
+	}
+	else if (m_sliderValue == 4)
+	{
+		window.setSize(sf::Vector2u(900, 600));
 	}
 }

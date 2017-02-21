@@ -8,6 +8,7 @@
 #include "Options.h"
 #include "Gameplay.h"
 #include <sstream>
+#include <SFML/Audio.hpp>
 
 enum MenuState
 {
@@ -44,6 +45,7 @@ private:
 	OptionsScreen *m_options;
 	Gameplay *m_gamePlay;
 	sf::Font m_font;
+	sf::Music m_music;
 };
 
 #endif !GAME_H

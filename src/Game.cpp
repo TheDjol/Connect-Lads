@@ -13,8 +13,15 @@ Game::Game()
 	}
 	m_startScreen = new startScreen(*this, m_font);
 	m_mainMenu = new MainMenu(*this, m_font);
-	m_options = new OptionsScreen(*this, m_font);
+	m_options = new OptionsScreen(*this, m_font, m_window);
 	m_gamePlay = new Gameplay(*this, m_font);
+
+	if (!m_music.openFromFile(".\\resources\\Music\\Chopin_-_Nocturne_op.wav"))
+	{
+		std::cout << "Problem loading music file!" << std::endl;
+	}
+
+	m_music.play();
 }
 
 //Game deconstructor
@@ -58,6 +65,7 @@ void Game::setGameState(MenuState gameState)
 //Function to update the game
 void Game::update(sf::Time delta)
 {
+	
 	m_state = m_xController.update();	//Updates the controller
 
 	switch (m_screen)
@@ -86,6 +94,7 @@ void Game::update(sf::Time delta)
 //Function to draw all visual info to the screen
 void Game::draw(sf::RenderWindow &window)
 {
+	//m_window.setSize(sf::Vector2u(400, 400));
 	switch (m_screen)
 	{
 	case MenuState::Start:

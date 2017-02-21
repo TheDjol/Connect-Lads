@@ -22,7 +22,7 @@ enum optionButton	//An enum for which button is selected
 class OptionsScreen
 {
 public:
-	OptionsScreen(Game& game, sf::Font &font);	// Constructor
+	OptionsScreen(Game& game, sf::Font &font, sf::RenderWindow &window);	// Constructor
 	~OptionsScreen();	// De-constructor
 	// Function to update the options creen
 	void update(GamePadState m_state, sf::Time deltaTime, Xbox360Controller2 m_controller);
@@ -34,6 +34,8 @@ public:
 	// Function to check if buttons are selected 
 	void selectedButton(GamePadState m_state, Xbox360Controller2 m_controller);
 
+	void changeWindowResolution(sf::RenderWindow& window);
+
 private:
 	Game *m_game; // The game object so you can change game states
 	optionButton m_oButton = optionButton::Option1;	// The enum starts at option 1
@@ -41,6 +43,8 @@ private:
 	bool m_transitionToMenu;	
 	// Bool for whether or not the options screen is transitioning in from the menu
 	bool m_transitionFromMenu = true;
+
+	sf::RenderWindow &m_window;
 
 	sf::Font m_font;
 
@@ -55,6 +59,8 @@ private:
 	std::string m_labelText;
 
 	Slider m_slider;	// The slider
+
+	int m_sliderValue;
 
 	RadioButton m_radioButton; // The radio button
 

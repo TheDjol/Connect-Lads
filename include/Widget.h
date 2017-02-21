@@ -51,7 +51,7 @@ private:
 	
 	sf::Text m_text;
 	sf::Font m_font;
-	bool hasFocus;
+	bool m_hasFocus;
 	sf::FloatRect m_textRectangle;
 	sf::FloatRect m_spriteRectangle;
 };
@@ -83,7 +83,7 @@ public:
 
 private:
 	sf::Texture m_texture;
-	bool hasFocus;
+	bool m_hasFocus;
 	sf::FloatRect m_spriteRectangle;
 };
 #endif // !RADIOBUTTON_H
@@ -95,7 +95,7 @@ class Slider : public Widget
 {
 public:
 	Slider();
-	Slider(sf::Vector2f *position);
+	Slider(sf::Vector2f *position, int numOfSegments);
 	~Slider();
 
 	void update();
@@ -107,16 +107,19 @@ public:
 	void moveRight();
 	void moveLeft();
 
-	void incrementSlider();
-	void decrementSlider();
+	int incrementSlider();
+	int decrementSlider();
 
 	sf::Vector2f m_position;
 
 	sf::RectangleShape m_slider;
 
 private:
-	bool hasFocus;
+	bool m_hasFocus;
 	
+	int m_numOfSegments;	// The number of different options on the slider.
+	int m_currentSegment;
+
 	sf::CircleShape m_circle;
 	sf::RectangleShape m_sliderBackground;
 };
