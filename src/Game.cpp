@@ -11,10 +11,7 @@ Game::Game()
 	{
 		std::cout << "Problem loading font file!" << std::endl;
 	}
-	m_startScreen = new startScreen(*this, m_font);
-	m_mainMenu = new MainMenu(*this, m_font);
-	m_options = new OptionsScreen(*this, m_font, m_window);
-	m_gamePlay = new Gameplay(*this, m_font);
+
 
 	if (!m_music.openFromFile(".\\resources\\Music\\Chopin_-_Nocturne_op.wav"))
 	{
@@ -22,6 +19,11 @@ Game::Game()
 	}
 
 	m_music.play();
+
+	m_startScreen = new startScreen(*this, m_font);
+	m_mainMenu = new MainMenu(*this, m_font);
+	m_options = new OptionsScreen(*this, m_font, m_window);
+	m_gamePlay = new Gameplay(*this, m_font);
 }
 
 //Game deconstructor
@@ -113,5 +115,17 @@ void Game::draw(sf::RenderWindow &window)
 		m_window.clear(sf::Color::Blue);	//Clears screen
 		m_window.display();	//Displays the screen
 		break;
+	}
+}
+
+void Game::pauseMusic(bool pauseMusic)
+{
+	if (pauseMusic)
+	{
+		m_music.pause();
+	}
+	else if (!pauseMusic)
+	{
+		m_music.play();
 	}
 }

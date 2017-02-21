@@ -63,6 +63,7 @@ private:
 	int m_sliderValue;
 
 	RadioButton m_radioButton; // The radio button
+	bool m_previouslyFilled;
 
 	sf::Texture m_emptyRadioButtonTex;	//Texture for the empty radio button
 	sf::Texture m_fullRadioButtonTex;	//Texture for the full radio button

@@ -58,8 +58,8 @@ OptionsScreen::OptionsScreen(Game& game, sf::Font &font, sf::RenderWindow &windo
 	m_labelText = "Mute";
 	m_label = Label(&m_labelText, &m_font, &sf::Vector2f(1020,200));
 
-	m_slider = Slider(&sf::Vector2f(930, 280), 4);
-	m_sliderValue = 4;
+	m_slider = Slider(&sf::Vector2f(930, 280), 5);
+	m_sliderValue = 5;
 
 }
 
@@ -74,6 +74,17 @@ void OptionsScreen::update(GamePadState m_state, sf::Time deltaTime, Xbox360Cont
 	checkButtonSelected(m_state, m_controller);	//Calls the function to check which button is selected
 	selectedButton(m_state, m_controller);	//Calls the function to check if a button has been clicked
 	changeWindowResolution(m_window);
+	m_slider.update();
+	
+	if (!m_radioButton.m_filled && m_previouslyFilled)
+	{
+		m_game->pauseMusic(false);
+	}
+	else if (m_radioButton.m_filled && !m_previouslyFilled)
+	{
+		m_game->pauseMusic(true);
+	}
+	
 
 	//If the options is transitioning in from the menu
 	if (m_transitionFromMenu)
@@ -91,8 +102,6 @@ void OptionsScreen::update(GamePadState m_state, sf::Time deltaTime, Xbox360Cont
 		
 	}
 
-	m_slider.update();
-
 	//If the options is transitioning to the menu
 	if (m_transitionToMenu)
 	{
@@ -102,7 +111,6 @@ void OptionsScreen::update(GamePadState m_state, sf::Time deltaTime, Xbox360Cont
 			m_radioButton.moveRight();
 			m_slider.moveRight();
 			m_label.moveRight();
-
 		}
 		else
 		{
@@ -111,7 +119,7 @@ void OptionsScreen::update(GamePadState m_state, sf::Time deltaTime, Xbox360Cont
 			m_game->m_screen = MenuState::MenuScreen;
 		}
 	}
-
+	m_previouslyFilled = m_radioButton.m_filled;
 }
 
 // Function to render the options screen

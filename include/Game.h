@@ -33,6 +33,8 @@ public:
 	void setGameState(MenuState gameState);	//Function to set the game state
 	MenuState m_screen;
 
+	void pauseMusic(bool pauseMusic);
+
 private:
 	sf::RenderWindow m_window;	//The game window
 	void update(sf::Time delta);	//Function to update the game

@@ -169,7 +169,7 @@ Slider::Slider()
 
 Slider::Slider(sf::Vector2f * position, int numOfSegments) :
 	m_position(*position),
-	m_numOfSegments(numOfSegments)
+	m_numOfSegments(numOfSegments - 1)	// Using numOfSegments -1 as we are using zero based numbering.
 {
 	float circleSize = 15.0f;
 	float sizeY = 20.0f;
@@ -186,7 +186,7 @@ Slider::Slider(sf::Vector2f * position, int numOfSegments) :
 	m_slider.setSize(sf::Vector2f(sizeX, sizeY));
 	m_circle.setRadius(circleSize);
 
-	m_currentSegment = numOfSegments;
+	m_currentSegment = m_numOfSegments;
 }
 
 Slider::~Slider()
