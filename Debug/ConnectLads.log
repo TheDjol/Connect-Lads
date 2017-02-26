@@ -1,4 +1,6 @@
-﻿  MainMenu.cpp
-c:\users\dijitol\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\mainmenu.cpp(67): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  StartScreen.cpp
+c:\users\dijitol\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(58): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\dijitol\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\dijitol\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(79): warning C4305: 'argument': truncation from 'double' to 'float'
   ConnectLads.vcxproj -> C:\Users\DiJitOL\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.exe
   ConnectLads.vcxproj -> C:\Users\DiJitOL\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.pdb (Partial PDB)
