@@ -1,16 +1,14 @@
 /// <summary>
-/// @mainpage Button Game -> A game that features a main menu and the gameplay hinges on the use of buttons.
-/// @Author D.J. O'Leary and Peter Daly
+/// @mainpage Connect Lads -> A game that features a UI elements and has connect 4 like gameplay that revolves around the usage of buttons.
+/// @Authors D.J. O'Leary and Peter Daly
 /// @Version 1.0
-/// @brief program that uses buttons for gameplay.
+/// @brief Connect 4 like game.
 ///
-/// A program that shows 
 /// 
-/// Date/ Start time -> End time/ length of time.
-/// 23/01/16 / 17:45 -> 19:00 / 
-/// 24/01/16 / 14:30 ->
+/// Date/ Start time -> End time / length of time.
+/// 23/01/17 / 17:45 -> 19:00 / 1hr 15mins.
 /// 
-/// Total Time Taken: 
+/// Total Time Taken: ???
 /// </summary>
 
 #ifdef _DEBUG 
@@ -32,8 +30,8 @@
 
 int main()
 {
-	Game game;	//the game object
-	game.run();	//runs the game
+	Game game;	// The game object
+	game.run();	// Runs the game
 
-	std::system("PAUSE");
+	return 0;
 }

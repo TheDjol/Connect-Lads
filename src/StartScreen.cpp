@@ -8,7 +8,7 @@ startScreen::startScreen(Game& game, sf::Font &font) :
 	{
 		{
 			std::string s("Error loading texture");	// Outputs error message.
-			throw std::exception(s.c_str());	// Opens a error window with the erro message displayed.
+			throw std::exception(s.c_str());	// Opens a error window with the error message displayed.
 		}
 	}
 	m_sprite.setTexture(m_texture);	// Sets the texture of the sprite to the one that was just loaded in. 
@@ -17,7 +17,7 @@ startScreen::startScreen(Game& game, sf::Font &font) :
 	{
 		{
 			std::string s("Error loading texture");	// Outputs error message.
-			throw std::exception(s.c_str());	// Opens a error window with the erro message displayed.
+			throw std::exception(s.c_str());	// Opens a error window with the error message displayed.
 		}
 	}
 	m_jack.setTexture(m_jackTex);	// Sets the texture of the sprite to the one that was just loaded in.
@@ -26,7 +26,7 @@ startScreen::startScreen(Game& game, sf::Font &font) :
 	{
 		{
 			std::string s("Error loading texture");	// Outputs error message.
-			throw std::exception(s.c_str());	// Opens a error window with the erro message displayed.
+			throw std::exception(s.c_str());	// Opens a error window with the error message displayed.
 		}
 	}
 	m_john.setTexture(m_johnTex);	// Sets the texture of the sprite to the one that was just loaded in.
