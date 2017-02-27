@@ -1,6 +1,21 @@
-﻿  StartScreen.cpp
-c:\users\dijitol\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(58): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\dijitol\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\dijitol\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(79): warning C4305: 'argument': truncation from 'double' to 'float'
-  ConnectLads.vcxproj -> C:\Users\DiJitOL\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.exe
-  ConnectLads.vcxproj -> C:\Users\DiJitOL\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.pdb (Partial PDB)
+﻿  main.cpp
+  Xbox360Controller.cpp
+  Widget.cpp
+  StartScreen.cpp
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(58): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\startscreen.cpp(79): warning C4305: 'argument': truncation from 'double' to 'float'
+  Options.cpp
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\options.cpp(47): warning C4305: 'argument': truncation from 'double' to 'float'
+  MainMenu.cpp
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\mainmenu.cpp(74): warning C4305: 'argument': truncation from 'double' to 'float'
+  Gameplay.cpp
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\gameplay.cpp(52): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\gameplay.cpp(62): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\gameplay.cpp(78): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Game.cpp
+c:\users\c00205483\desktop\button-game-d-j-o-leary-and-peter-daly-2\src\game.cpp(51): warning C4244: '-=': conversion from 'const double' to 'sf::Int32', possible loss of data
+  Generating Code...
+  LINK : C:\Users\c00205483\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.exe not found or not built by the last incremental link; performing full link
+  ConnectLads.vcxproj -> C:\Users\c00205483\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.exe
+  ConnectLads.vcxproj -> C:\Users\c00205483\Desktop\button-game-d-j-o-leary-and-peter-daly-2\Debug\ConnectLads.pdb (Partial PDB)

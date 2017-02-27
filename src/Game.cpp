@@ -12,14 +12,15 @@ Game::Game()
 		std::cout << "Problem loading font file!" << std::endl;
 	}
 
-
+	// Loads the music
 	if (!m_music.openFromFile(".\\resources\\Music\\Chopin_-_Nocturne_op.wav"))
 	{
 		std::cout << "Problem loading music file!" << std::endl;
 	}
 
-	m_music.play();
+	m_music.play();	// Plays the music
 
+	// Initializes all the different screens
 	m_startScreen = new startScreen(*this, m_font);
 	m_mainMenu = new MainMenu(*this, m_font);
 	m_options = new OptionsScreen(*this, m_font, m_window);
@@ -70,6 +71,7 @@ void Game::update(sf::Time delta)
 	
 	m_state = m_xController.update();	//Updates the controller
 
+	// Updates each game screen depending on which one is chosen
 	switch (m_screen)
 	{
 	case Start:
@@ -96,7 +98,7 @@ void Game::update(sf::Time delta)
 //Function to draw all visual info to the screen
 void Game::draw(sf::RenderWindow &window)
 {
-	//m_window.setSize(sf::Vector2u(400, 400));
+	// Renders each game screen depending on which one is chosen
 	switch (m_screen)
 	{
 	case MenuState::Start:
@@ -118,14 +120,15 @@ void Game::draw(sf::RenderWindow &window)
 	}
 }
 
+// Function pause the music
 void Game::pauseMusic(bool pauseMusic)
 {
-	if (pauseMusic)
+	if (pauseMusic)	
 	{
-		m_music.pause();
+		m_music.pause();	// Pauses it
 	}
 	else if (!pauseMusic)
 	{
-		m_music.play();
+		m_music.play();	// Plays it
 	}
 }

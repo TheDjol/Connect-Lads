@@ -75,22 +75,22 @@ private:
 	const int GAME_GRID_ROWS = 6;
 	sf::RectangleShape m_gameGrid[6][7];
 
-	sf::Color m_gameGridColour[6][7];
+	sf::Color m_gameGridColour[6][7];	// 2-D array to hold the colour of each rectangle shape
 
-	bool m_player = true;
+	bool m_player = true;	// Bool to determine which player is playing
 
 	int m_buttonNumber = 0; // Int for which button is chosen
 
-	bool m_victory = false;
+	bool m_victory = false;	// Bool for whether or not someone won
 
-	sf::Font m_font;
-	sf::Text m_winner;
-	sf::Text m_return;
+	sf::Font m_font;	// The font
+	sf::Text m_winner;	// The text	to display who wins
+	sf::Text m_return;	// The text to tell the player how to get back to the menu
 
-	sf::Texture m_headTexture[4];
-	sf::Sprite m_headSprite[6][7];
+	sf::Texture m_headTexture[4];	// An array of textures for each head
+	sf::Sprite m_headSprite[6][7];	// A 2-D array to hold the head sprites
 
-	sf::Texture m_blankTexture;
+	sf::Texture m_blankTexture;	// A blank texture to wipe the board
 
 	int m_randomHead = 0; //int for which head should be drawn
 };

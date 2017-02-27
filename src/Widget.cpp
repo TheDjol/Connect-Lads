@@ -114,11 +114,7 @@ RadioButton::RadioButton(sf::Texture * texture, sf::Vector2f * position) :
 	m_position(*position),	// Sets m_position to the de-referenced value of the position argument.
 	m_texture(*texture)	// Sets m_texture to the de-referenced value of the texture argument.
 {
-	/// <summary>
-	/// *******************
-	/// ASK ABOUT THIS LINE
-	/// *******************
-	/// </summary>
+
 	m_sprite.setTexture(*texture);	// Sets the texture of the sprite to be that of the de-referenced texture.
 
 	m_spriteRectangle = m_sprite.getLocalBounds();	// Gets the dimensions of the rectangle that contains the text.
