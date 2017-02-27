@@ -36,17 +36,12 @@ Button::Button()
 
 }
 
-Button::Button(sf::Texture *texture, std::string *text, sf::Vector2f *position, sf::Font *font) :
+Button::Button(sf::Texture& texture, std::string *text, sf::Vector2f *position, sf::Font *font) :
+	m_texture(texture),	// Sets m_texture to the address of the texture argument.
 	m_position(*position),	// Sets m_position to the de-referenced value of the position argument.
-	m_texture(*texture),	// Sets m_texture to the de-referenced value of the texture argument.
 	m_text(*text, *font, 28)	// Sets m_text to the de-referenced value of the text argument as well as the de-referenced value of the font argument and then sets the size of the text to 28.
 {
-	/// <summary>
-	/// *******************
-	/// ASK ABOUT THIS LINE
-	/// *******************
-	/// </summary>
-	m_sprite.setTexture(*texture);	// Sets the texture of the sprite to be that of the de-referenced texture.
+	m_sprite.setTexture(texture);	// Sets the texture of the sprite to be that of the texture stored at the address.
 
 	m_spriteRectangle = m_sprite.getLocalBounds();	// Gets the dimensions of the rectangle that contains the sprite.
 	m_sprite.setOrigin(m_spriteRectangle.left + m_spriteRectangle.width / 2.0f, m_spriteRectangle.top + m_spriteRectangle.height / 2.0f);	// Centres the origin of the text.

@@ -60,7 +60,7 @@ public:
 	/// <param name="text"></param>
 	/// <param name="position"></param>
 	/// <param name="font"></param>
-	Button(sf::Texture *texture, std::string *text, sf::Vector2f *position, sf::Font *font);
+	Button(sf::Texture& texture, std::string *text, sf::Vector2f *position, sf::Font *font);
 	~Button();	// Deconstructor for the Button object.
 
 	virtual void update() override;	// "update" method for the Button object, Overrides the "update" method in the widget.

@@ -39,7 +39,7 @@ OptionsScreen::OptionsScreen(Game& game, sf::Font &font, sf::RenderWindow &windo
 	}
 
 	std::string back = "BACK";	// Creates a string called and assigns it a value.
-	m_buttons = Button(&m_buttonTex, &back, &sf::Vector2f(1000, 400), &font);	// Initalizes the button.
+	m_buttons = Button(m_buttonTex, &back, &sf::Vector2f(1000, 400), &font);	// Initalizes the button.
 
 	m_backgroundSprite.setTexture(m_backgroundTexture);	// Assigns the background texture to the background sprite.
 	m_backgroundSprite.setOrigin(450, 300);	// Sets the backgrounds origin.

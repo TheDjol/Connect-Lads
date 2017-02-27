@@ -51,7 +51,7 @@ Gameplay::Gameplay(Game& game, sf::Font &font) :
 	
 	for (int i = 0; i < SIZE_OF_BUTTON_ARRAY; i++)	// Cycles through each button 
 	{
-		m_buttons[i] = Button(&m_buttonTex, &buttonText[i], &sf::Vector2f(113 * (i + 1), 100), &font);	// Constructs the buttons
+		m_buttons[i] = Button(m_buttonTex, &buttonText[i], &sf::Vector2f(113 * (i + 1), 100), &font);	// Constructs the buttons
 		m_buttons[i].scaleButtons(0.8f, 1.0f);	// Scales the buttons
 	}
 

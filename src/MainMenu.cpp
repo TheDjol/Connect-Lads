@@ -28,9 +28,9 @@ MainMenu::MainMenu(Game& game, sf::Font &font) :
 	std::string exit = "EXIT";
 	
 	// Initializing the three buttons with their texture, string, position and font
-	m_buttons[0] = Button(&m_buttonTexture, &play, &sf::Vector2f(450, 200), &font);
-	m_buttons[1] = Button(&m_buttonTexture, &option, &sf::Vector2f(450, 300), &font);
-	m_buttons[2] = Button(&m_buttonTexture, &exit, &sf::Vector2f(450, 400), &font);
+	m_buttons[0] = Button(m_buttonTexture, &play, &sf::Vector2f(450, 200), &font);
+	m_buttons[1] = Button(m_buttonTexture, &option, &sf::Vector2f(450, 300), &font);
+	m_buttons[2] = Button(m_buttonTexture, &exit, &sf::Vector2f(450, 400), &font);
 
 	m_backgroundSprite.setTexture(m_backgroundTexture);	// Sets the background texture
 
