@@ -48,10 +48,13 @@ OptionsScreen::OptionsScreen(Game& game, sf::Font &font, sf::RenderWindow &windo
 
 	m_radioButton = RadioButton(&m_emptyRadioButtonTex, &sf::Vector2f(950, 200));	// Initalizes the radioButton.
 
-	m_labelText = "Mute";
-	m_label = Label(&m_labelText, &m_font, &sf::Vector2f(1020,200));	// Initalizes the label.
+	m_labelText[0] = "Mute";
+	m_label[0] = Label(&m_labelText[0], &m_font, &sf::Vector2f(1020,200), 38);	// Initalizes the label.
 
-	m_slider = Slider(&sf::Vector2f(930, 280), 5);	// Initalizes the slider.
+	m_labelText[1] = "Window Size";
+	m_label[1] = Label(&m_labelText[1], &m_font, &sf::Vector2f(1010, 270), 28);	// Initalizes the label.
+
+	m_slider = Slider(&sf::Vector2f(930, 300), 5);	// Initalizes the slider.
 	m_sliderValue = 5;	// Number of segments in the slider.
 
 }
@@ -85,7 +88,8 @@ void OptionsScreen::update(GamePadState m_state, sf::Time deltaTime, Xbox360Cont
 			m_buttons.moveLeft();	// Calls the moveLeft method in the button class.
 			m_radioButton.moveLeft();	// Calls the moveLeft method in the radio button class.
 			m_slider.moveLeft();	// Calls the moveLeft method in the slider class.
-			m_label.moveLeft();	// Calls the moveLeft method in the label class.
+			m_label[0].moveLeft();	// Calls the moveLeft method in the label class.
+			m_label[1].moveLeft();
 		}
 		else
 		{
@@ -101,7 +105,8 @@ void OptionsScreen::update(GamePadState m_state, sf::Time deltaTime, Xbox360Cont
 			m_buttons.moveRight();	// Calls the moveRight method in the button class.
 			m_radioButton.moveRight();	// Calls the moveRight method in the radio button class.
 			m_slider.moveRight();	// Calls the moveRight method in the slider class.
-			m_label.moveRight();	// Calls the moveRight method in the label class.
+			m_label[0].moveRight();	// Calls the moveRight method in the label class.
+			m_label[1].moveRight();
 		}
 		else
 		{
@@ -122,7 +127,8 @@ void OptionsScreen::render(sf::RenderWindow & window)	// Function to render the 
 	m_radioButton.render(window);	// Draws the radio button.
 	m_buttons.render(window);	// Draws the button.
 	m_slider.render(window);	// Draws the slider.
-	m_label.render(window);	// Draws the label.
+	m_label[0].render(window);	// Draws the label.
+	m_label[1].render(window);	// Draws the label.
 
 	window.display();	// Displays the screen.
 }
@@ -142,7 +148,8 @@ void OptionsScreen::checkButtonSelected(GamePadState m_state, Xbox360Controller2
 		m_buttons.loseFocus();	// Removes focus.
 		m_slider.loseFocus();	// Removes focus.
 		m_radioButton.getFocus();	// Gives focus.
-		m_label.getFocus();	// Gives focus.
+		m_label[0].getFocus();	// Gives focus.
+		m_label[1].loseFocus(); // Removes focus
 		
 		if ((m_state.dpadDown && !m_controller.m_previousState.dpadDown) || (m_state.LeftThumbStick.y > 50 && m_controller.m_previousState.LeftThumbStick.y < 50))	// Checks if the player is trying to select the button below the current one.
 		{
@@ -161,7 +168,8 @@ void OptionsScreen::checkButtonSelected(GamePadState m_state, Xbox360Controller2
 		m_buttons.loseFocus();	// Removes focus.
 		m_slider.getFocus();	// Gives focus.
 		m_radioButton.loseFocus();	// Removes focus.
-		m_label.loseFocus();	// Removes focus.
+		m_label[0].loseFocus();	// Removes focus.
+		m_label[1].getFocus();	// Get focus.
 		
 		if ((m_state.dpadDown && !m_controller.m_previousState.dpadDown) || (m_state.LeftThumbStick.y > 50 && m_controller.m_previousState.LeftThumbStick.y < 50))	// Checks if the player is trying to select the button below the current one.
 		{
@@ -193,7 +201,8 @@ void OptionsScreen::checkButtonSelected(GamePadState m_state, Xbox360Controller2
 		m_buttons.getFocus();	// Gives focus.
 		m_slider.loseFocus();	// Removes focus.
 		m_radioButton.loseFocus();	// Removes focus.
-		m_label.loseFocus();	// Removes focus.
+		m_label[0].loseFocus();	// Removes focus.
+		m_label[1].loseFocus();
 		
 		if ((m_state.dpadDown && !m_controller.m_previousState.dpadDown) || (m_state.LeftThumbStick.y > 50 && m_controller.m_previousState.LeftThumbStick.y < 50))	// Checks if the player is trying to select the button below the current one.
 		{

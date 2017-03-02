@@ -207,13 +207,14 @@ public:
 	Label();	// Default constructor for the Label object.
 	/// <summary>
 	/// Overloaded constructor fothe Label object.
-	/// Takes a string of text that is to drawn on screen, the font that the text will be 
-	/// and the position the text will be on-screen as arguments.
+	/// Takes a string of text that is to drawn on screen, the font that the text will be, 
+	/// the position the text will be on-screen and the size of the font as arguments.
 	/// </summary>
 	/// <param name="text"></param>
 	/// <param name="font"></param>
 	/// <param name="position"></param>
-	Label(std::string *text, sf::Font *font, sf::Vector2f *position);
+	/// <param name="size"></param>
+	Label(std::string *text, sf::Font *font, sf::Vector2f *position, int size);
 	~Label();	// Deconstructor for the Label object.
 
 	virtual void update() override;	// "update" method for the Label object, Overrides the "update" method in the widget.

@@ -53,8 +53,8 @@ private:
 	Button m_buttons;	// Button object on the options screen.
 	sf::Texture m_buttonTex;	// Texture for the button.
 
-	Label m_label;	// The Label that represents the radiobutton.
-	std::string m_labelText;	// The String of text assigned to the label.
+	Label m_label[2];	// The Labels used to describe the function of other widgets.
+	std::string m_labelText[2];	// The String of text assigned to the label.
 
 	Slider m_slider;	// The slider
 	int m_sliderValue;	// Stores a copy of what segment the slider is on.
